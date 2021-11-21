@@ -5,15 +5,25 @@
   nixpkgs.config.allowUnfree = true;
 
   imports = [
+    ## Local ##
     ./boot.nix
-    ./hardware-configuration.nix
     ./home.nix
     ./misc.nix
     ./override.nix
-    ./network.nix
     ./packages.nix
     ./programs.nix
     ./services.nix
+
+    ## Laptop-specific ##
+    ./laptop/boot.nix
+    ./laptop/hardware-configuration.nix
+    ./laptop/misc.nix
+    ./laptop/network.nix
+    ./laptop/override.nix
+    ./laptop/packages.nix
+    ./laptop/services.nix
+
+    ## External ##
     <home-manager/nixos>
   ];
 
@@ -29,6 +39,6 @@
   users.users.mado = {
     isNormalUser = true;
     description = "Madoura";
-    extraGroups = [ "wheel" "libvirtd" "input" "corectrl" ];
+    extraGroups = [ "wheel" "corectrl" ];
   };
 }

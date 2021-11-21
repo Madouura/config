@@ -7,6 +7,5 @@ in {
     lm_sensors
     htop
     nload
-    corectrl
   ];
 }

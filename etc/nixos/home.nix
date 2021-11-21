@@ -1,5 +1,3 @@
-{ pkgs, ... }:
-
 let
   baseConfig = { allowUnfree = true; };
   unstable = import <nixos-unstable> { config = baseConfig; };
@@ -9,58 +7,64 @@ in {
     useGlobalPkgs = true;
 
     users.mado = {
-      services.mpd = {
-        enable = true;
-        musicDirectory = /home/mado/Music;
-      };
-
       home = {
         stateVersion = "21.05";
 
-        packages = with pkgs; [
+        packages = with unstable; [
           # Utilities
-          unstable.virt-manager
-          unstable.wine
+          wine
           neofetch
           appimage-run
           gnome3.gnome-tweaks
-          unstable.flips
+          flips
 
           # Development
           gnumake
           gcc
 
           # Internet
-          unstable.discord
+          discord
           qbittorrent
+          mullvad-vpn
 
           # Media
           ffmpeg
           youtube-dl
-          unstable.easyeffects
-          unstable.scream
           gimp
-          pulseaudio
+          easyeffects
 
           # Games
-          unstable.yuzu-ea
-          unstable.dolphinEmuMaster
-          unstable.higan
+          yuzu-ea
+#          ares
         ];
+      };
+
+      services.mpd = {
+        enable = true;
+        package = unstable.mpd;
+        musicDirectory = /home/mado/Music;
       };
 
       programs = {
         home-manager.enable = true;
-        ncmpcpp.enable = true;
+
+        ncmpcpp = {
+          enable = true;
+          package = unstable.ncmpcpp;
+        };
 
         bash = {
           enable = true;
           historyControl = [ "erasedups" ];
 
           shellAliases = {
-            nupgrade = "sudo nix-channel --update && nix-channel --update && sudo nixos-rebuild switch --upgrade";
+            nupgrade = "nix-channel --update && sudo nixos-rebuild switch --upgrade";
             ncollect = "sudo nix-collect-garbage -d";
           };
+
+          bashrcExtra = ''
+            export XDG_DATA_HOME="/home/mado/.local/share"
+          '';
         };
 
         git = {
@@ -71,16 +75,20 @@ in {
 
         chromium = {
           enable = true;
+          package = unstable.chromium;
 
           extensions = [
+            { id = "gphhapmejobijbbhgpjhcjognlahblep"; } # Gnome Shell Integration
             { id = "cjpalhdlnbpafiamejdnhcphjbkeiagm"; } # Ublock Origin
             { id = "ponfpcnoihfmfllpaingbgckeeldkhle"; } # Enhancer for YouTube
             { id = "mnjggcdmjocbbbhaepdhchncahnbgone"; } # SponsorBlock for YouTube
+            { id = "dneaehbmnbhcippjikoajpoabadpodje"; } # Old Reddit Redirect
           ];
         };
 
         mpv = {
           enable = true;
+          package = unstable.mpv;
           defaultProfiles = [ "gpu-hq" ];
 
           config = {
@@ -93,13 +101,13 @@ in {
             alang = "jp,jpn,japan";
             slang = "en,eng,english";
             screenshot-template = "%F (%p)";
-            screenshot-directory = "~/Pictures/Screenshots";
+            screenshot-directory = "/home/mado/Pictures/Screenshots";
           };
         };
 
         vscode = {
           enable = true;
-          package = pkgs.vscodium;
+          package = unstable.vscodium;
         };
       };
 
@@ -110,21 +118,6 @@ in {
         address = "madouura@gmail.com";
         flavor = "gmail.com";
         primary = true;
-      };
-
-      systemd.user.services.scream-ivshmem = {
-        Install.WantedBy = [ "default.target" ];
-
-        Unit = {
-          Description = "Scream IVSHMEM pulse receiver";
-          After = [ "pipewire-pulse.service" ];
-          Wants = [ "pipewire-pulse.service" ];
-        };
-
-        Service = {
-          ExecStart = "${pkgs.scream}/bin/scream -m /dev/shm/scream-ivshmem -o pulse -n 'Windows 11 VM'";
-          Restart = "always";
-        };
       };
     };
   };

@@ -3,23 +3,22 @@ let
   unstable = import <nixos-unstable> { config = baseConfig; };
 in {
   imports = [
-    <nixos-unstable/nixos/modules/virtualisation/libvirtd.nix>
+    <nixos-unstable/nixos/modules/hardware/corectrl.nix>
     <nixos-unstable/nixos/modules/services/hardware/joycond.nix>
+    <nixos-unstable/nixos/modules/services/networking/mullvad-vpn.nix>
   ];
 
   disabledModules = [
-    "virtualisation/libvirtd.nix"
+    "hardware/corectrl.nix"
     "services/hardware/joycond.nix"
+    "services/networking/mullvad-vpn.nix"
   ];
 
   nixpkgs.config = baseConfig // {
     packageOverrides = pkgs: {
-      linuxPackages_latest = unstable.linuxPackages_latest;
-      libvirt = unstable.libvirt;
-      qemu = unstable.qemu;
-      OVMFFull = unstable.OVMFFull;
+      corectrl = unstable.corectrl;
       joycond = unstable.joycond;
-      steam = unstable.steam;
+      mullvad-vpn = unstable.mullvad-vpn;
     };
   };
 }
