@@ -45,6 +45,13 @@ in {
         enable = true;
         package = unstable.mpd;
         musicDirectory = /home/mado/Music;
+
+        extraConfig = ''
+          audio_output {
+            type            "pipewire"
+            name            "PipeWire Sound Server"
+          }
+        '';
       };
 
       programs = {

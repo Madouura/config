@@ -17,7 +17,7 @@ in {
 
     initrd = {
       supportedFilesystems = [ "btrfs" ];
-      kernelModules = [ "amdgpu" ];
+      availableKernelModules = [ "amdgpu" ];
     };
   };
 
