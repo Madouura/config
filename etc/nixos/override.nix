@@ -13,12 +13,4 @@ in {
     "services/hardware/joycond.nix"
     "services/networking/mullvad-vpn.nix"
   ];
-
-  nixpkgs.config = baseConfig // {
-    packageOverrides = pkgs: {
-      corectrl = unstable.corectrl;
-      joycond = unstable.joycond;
-      mullvad-vpn = unstable.mullvad-vpn;
-    };
-  };
 }

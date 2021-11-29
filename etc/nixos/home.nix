@@ -17,6 +17,7 @@ in {
           appimage-run
           gnome3.gnome-tweaks
           flips
+          protonup
 
           # Development
           gnumake
@@ -83,6 +84,9 @@ in {
             { id = "ponfpcnoihfmfllpaingbgckeeldkhle"; } # Enhancer for YouTube
             { id = "mnjggcdmjocbbbhaepdhchncahnbgone"; } # SponsorBlock for YouTube
             { id = "dneaehbmnbhcippjikoajpoabadpodje"; } # Old Reddit Redirect
+            { id = "mpbjkejclgfgadiemmefgebjfooflfhl"; } # Buster Captcha Solver
+            { id = "moicohcfhhbmmngneghfjfjpdobmmnlg"; } # LiveTL
+
           ];
         };
 
