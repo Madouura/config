@@ -1,6 +1,7 @@
 let
   baseConfig = { allowUnfree = true; };
   unstable = import <nixos-unstable> { config = baseConfig; };
+  ares = unstable.callPackage ./packages/ares.nix { };
 in {
   home-manager = {
     useUserPackages = true;
@@ -31,12 +32,12 @@ in {
           # Media
           ffmpeg
           youtube-dl
-          gimp
           easyeffects
+          gimp
 
           # Games
           yuzu-ea
-#          ares
+          ares
         ];
       };
 
@@ -86,7 +87,6 @@ in {
             { id = "dneaehbmnbhcippjikoajpoabadpodje"; } # Old Reddit Redirect
             { id = "mpbjkejclgfgadiemmefgebjfooflfhl"; } # Buster Captcha Solver
             { id = "moicohcfhhbmmngneghfjfjpdobmmnlg"; } # LiveTL
-
           ];
         };
 
