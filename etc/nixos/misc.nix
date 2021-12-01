@@ -6,6 +6,7 @@ in {
   zramSwap.enable = true;
   powerManagement.cpuFreqGovernor = "ondemand";
   security.rtkit.enable = true;
+  virtualisation.waydroid.enable = true;
   fonts.fonts = with unstable; [ ipafont baekmuk-ttf ];
 
   environment .variables = {

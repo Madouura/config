@@ -3,7 +3,7 @@ let
   unstable = import <nixos-unstable> { config = baseConfig; };
 in {
   boot = {
-    kernelPackages = unstable.linuxPackages_latest;
+    kernelPackages = unstable.linuxPackages_xanmod;
     supportedFilesystems = [ "btrfs" ];
 
     loader = {
