@@ -25,7 +25,7 @@ stdenv.mkDerivation rec {
   version = "1.0.4";
 
   src = fetchurl {
-    url = "https://download.tetrd.app/files/tetrd.linux_amd64.pkg.tar.xz";
+    url = "https://web.archive.org/web/20211130190525/https://download.tetrd.app/files/tetrd.linux_amd64.pkg.tar.xz";
     sha256 = "1bxp7rg2dm9nnvkgg48xd156d0jgdf35flaw0bwzkkh3zz9ysry2";
   };
 
@@ -66,7 +66,7 @@ stdenv.mkDerivation rec {
     cp -r $sourceRoot/usr/share $out
 
     wrapProgram $out/opt/Tetrd/tetrd \
-      --prefix LD_LIBRARY_PATH ":" ${lib.makeLibraryPath (buildInputs)}
+      --prefix LD_LIBRARY_PATH ":" ${lib.makeLibraryPath buildInputs}
 
     runHook postInstall
   '';

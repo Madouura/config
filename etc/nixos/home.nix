@@ -36,6 +36,7 @@ in {
           gimp
 
           # Games
+          steam-run-native
           yuzu-ea
           ares
         ];
@@ -94,6 +95,7 @@ in {
             { id = "dneaehbmnbhcippjikoajpoabadpodje"; } # Old Reddit Redirect
             { id = "mpbjkejclgfgadiemmefgebjfooflfhl"; } # Buster Captcha Solver
             { id = "moicohcfhhbmmngneghfjfjpdobmmnlg"; } # LiveTL
+            { id = "hkgfoiooedgoejojocmhlaklaeopbecg"; } # Picture in Picture
           ];
         };
 

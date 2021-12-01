@@ -14,13 +14,13 @@
 
 stdenv.mkDerivation rec {
   pname = "ares";
-  version = "125.1";
+  version = "126";
 
   src = fetchFromGitHub {
     owner = "ares-emulator";
     repo = "ares";
     rev = "v${version}";
-    sha256 = "1bs5iklpwlkyxh6gb5r2zp9d322dl06gfjmfvxy0xflhpbmlmy0s";
+    sha256 = "1rj4vmz8lvpmfc6wni7222kagnw9f6jda9rcb6qky2kpizlp2d24";
   };
 
   parallel-rdp = fetchFromGitHub {
