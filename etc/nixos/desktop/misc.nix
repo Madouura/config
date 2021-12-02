@@ -11,7 +11,7 @@ in {
     onShutdown = "shutdown";
 
     qemu = {
-      package = unstable.qemu;
+      package = unstable.qemu_full;
       ovmf.package = unstable.OVMFFull;
 
       swtpm = {
