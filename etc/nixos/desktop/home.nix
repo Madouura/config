@@ -4,13 +4,11 @@ let
 in {
   home-manager = {
     users.mado = {
-      home = {
-        packages = with unstable; [
-          virt-manager
-          scream
-          dolphinEmuMaster
-        ];
-      };
+      home.packages = with unstable; [
+        virt-manager
+        scream
+        dolphinEmuMaster
+      ];
 
       systemd.user.services.scream-ivshmem = {
         Install.WantedBy = [ "default.target" ];

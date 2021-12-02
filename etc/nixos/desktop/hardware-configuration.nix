@@ -14,27 +14,15 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/mapper/cryptroot";
+    { device = "/dev/disk/by-uuid/3ce830cd-747f-4c86-84b8-4105a74a9f34";
       fsType = "btrfs";
       options = [ "subvol=@" ];
     };
 
   boot.initrd.luks.devices."cryptroot".device = "/dev/disk/by-uuid/f681190a-9012-4fef-acef-17c2626247da";
 
-  fileSystems."/home" =
-    { device = "/dev/mapper/cryptroot";
-      fsType = "btrfs";
-      options = [ "subvol=@home" ];
-    };
-
-  fileSystems."/.snapshots" =
-    { device = "/dev/mapper/cryptroot";
-      fsType = "btrfs";
-      options = [ "subvol=@snapshots" ];
-    };
-
   fileSystems."/var/log" =
-    { device = "/dev/mapper/cryptroot";
+    { device = "/dev/disk/by-uuid/3ce830cd-747f-4c86-84b8-4105a74a9f34";
       fsType = "btrfs";
       options = [ "subvol=@var_log" ];
     };
@@ -42,6 +30,18 @@
   fileSystems."/boot" =
     { device = "/dev/disk/by-uuid/C2DC-650A";
       fsType = "vfat";
+    };
+
+  fileSystems."/.snapshots" =
+    { device = "/dev/disk/by-uuid/3ce830cd-747f-4c86-84b8-4105a74a9f34";
+      fsType = "btrfs";
+      options = [ "subvol=@snapshots" ];
+    };
+
+  fileSystems."/home" =
+    { device = "/dev/disk/by-uuid/3ce830cd-747f-4c86-84b8-4105a74a9f34";
+      fsType = "btrfs";
+      options = [ "subvol=@home" ];
     };
 
   fileSystems."/mnt/store" =
@@ -53,6 +53,8 @@
 
   swapDevices = [ ];
 
+  powerManagement.cpuFreqGovernor = lib.mkDefault "ondemand";
+  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
   # high-resolution display
   hardware.video.hidpi.enable = lib.mkDefault true;
 }

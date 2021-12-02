@@ -16,10 +16,10 @@ in {
 
   nixpkgs.config = baseConfig // {
     packageOverrides = pkgs: {
-      joycond = unstable.joycond;
       corectrl = unstable.corectrl;
-      steam = unstable.steam;
+      joycond = unstable.joycond;
       mullvad-vpn = unstable.mullvad-vpn;
+      steam = unstable.steam;
     };
   };
 }

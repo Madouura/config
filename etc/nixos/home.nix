@@ -1,7 +1,9 @@
+{ pkgs, ... }:
+
 let
   baseConfig = { allowUnfree = true; };
   unstable = import <nixos-unstable> { config = baseConfig; };
-  ares = unstable.callPackage ./packages/ares.nix { };
+  ares = pkgs.callPackage ./packages/ares.nix { };
 in {
   home-manager = {
     useUserPackages = true;
@@ -9,7 +11,7 @@ in {
 
     users.mado = {
       home = {
-        stateVersion = "21.05";
+        stateVersion = "21.11";
 
         packages = with unstable; [
           # Utilities

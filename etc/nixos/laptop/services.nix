@@ -113,7 +113,7 @@
     };
 
     xserver = {
-#      displayManager.gdm.nvidiaWayland = true;
+      displayManager.gdm.nvidiaWayland = true;
       videoDrivers = [ "nvidia" ];
 
       deviceSection = ''

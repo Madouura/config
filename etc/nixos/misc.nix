@@ -14,8 +14,9 @@ in {
   };
 
   hardware = {
-    xpadneo.enable = true;
     cpu.amd.updateMicrocode = true;
+    enableRedistributableFirmware = true;
+    xpadneo.enable = true;
     pulseaudio.enable = false;
 
     opengl = {
