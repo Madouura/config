@@ -5,7 +5,6 @@ in {
   home-manager = {
     users.mado = {
       home.packages = with unstable; [
-        virt-manager
         scream
         dolphinEmuMaster
       ];

@@ -25,4 +25,25 @@ in {
       extraPackages32 = with unstable; [ driversi686Linux.amdvlk ];
     };
   };
+
+  virtualisation = {
+    waydroid.enable = true;
+
+    libvirtd = {
+      enable = true;
+      package = unstable.libvirt;
+      onBoot = "ignore";
+      onShutdown = "shutdown";
+
+      qemu = {
+        package = unstable.qemu_full;
+        ovmf.package = unstable.OVMFFull;
+
+        swtpm = {
+          enable = true;
+          package = unstable.swtpm;
+        };
+      };
+    };
+  };
 }

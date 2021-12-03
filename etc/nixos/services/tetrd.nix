@@ -1,19 +1,21 @@
 { config, lib, pkgs, ... }:
 
-{
-  options.services.tetrd.enable = lib.mkEnableOption pkgs.tetrd.meta.description;
+with lib; let
+  tetrd = pkgs.callPackage ../packages/tetrd.nix { };
+in {
+  options.services.tetrd.enable = mkEnableOption tetrd.meta.description;
 
-  config = lib.mkIf config.services.tetrd.enable {
-    environment.systemPackages = with pkgs; [ tetrd nettools ];
+  config = mkIf config.services.tetrd.enable {
+    environment.systemPackages = [ pkgs.nettools tetrd ];
 
     systemd = {
       # Seems to need root access for /run/tetrd.sock, which seems to be hard-coded
       services.tetrd = {
-        description = pkgs.tetrd.meta.description;
+        description = tetrd.meta.description;
         wantedBy = [ "multi-user.target" ];
 
         serviceConfig = {
-          ExecStart = "${pkgs.tetrd}/opt/Tetrd/bin/tetrd";
+          ExecStart = "${tetrd}/opt/Tetrd/bin/tetrd";
           Restart = "always";
         };
       };

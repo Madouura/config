@@ -27,6 +27,11 @@
       options = [ "subvol=@var_log" ];
     };
 
+  fileSystems."/boot" =
+    { device = "/dev/disk/by-uuid/F479-E3F7";
+      fsType = "vfat";
+    };
+
   fileSystems."/.snapshots" =
     { device = "/dev/disk/by-uuid/e5c4d681-8d9b-4bab-a5fa-7282ce16c311";
       fsType = "btrfs";
@@ -39,13 +44,10 @@
       options = [ "subvol=@home" ];
     };
 
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/F479-E3F7";
-      fsType = "vfat";
-    };
-
   swapDevices = [ ];
 
+  powerManagement.cpuFreqGovernor = lib.mkDefault "ondemand";
+  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
   # high-resolution display
   hardware.video.hidpi.enable = lib.mkDefault true;
 }

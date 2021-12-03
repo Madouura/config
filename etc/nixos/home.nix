@@ -21,6 +21,7 @@ in {
           gnome3.gnome-tweaks
           flips
           protonup
+          virt-manager
 
           # Development
           gnumake
