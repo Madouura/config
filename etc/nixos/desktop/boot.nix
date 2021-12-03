@@ -7,7 +7,7 @@
     kernelModules = [ "nct6775" "jc42" ];
 
     initrd = {
-      availableKernelModules = [ "vfio-pci" ];
+      availableKernelModules = [ "vfio-pci" "amdgpu" ];
       luks.devices."cryptwrot".device = "/dev/disk/by-uuid/7d93a38e-8320-452a-9868-64f6bfdf0b2d";
 
       preDeviceCommands = ''

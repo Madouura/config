@@ -13,5 +13,6 @@ in {
     # Utilities
     nvidia-offload
     libstrangle
+    (steam.override { withPrimus = true; }).run
   ];
 }
