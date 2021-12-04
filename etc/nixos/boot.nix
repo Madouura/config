@@ -4,6 +4,7 @@ let
 in {
   boot = {
     kernelPackages = unstable.linuxPackages_xanmod;
+    kernelModules = [ "binder_linux" ];
     supportedFilesystems = [ "btrfs" ];
     initrd.supportedFilesystems = [ "btrfs" ];
 
