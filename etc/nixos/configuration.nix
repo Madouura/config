@@ -30,6 +30,7 @@
     ./laptop/network.nix
     ./laptop/override.nix
     ./laptop/packages.nix
+    ./laptop/programs.nix
     ./laptop/services.nix
 
     ## External ##

@@ -12,7 +12,5 @@ in {
   environment.systemPackages = with pkgs; [
     # Utilities
     nvidia-offload
-    libstrangle
-    (steam.override { withPrimus = true; }).run
   ];
 }

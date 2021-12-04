@@ -4,7 +4,7 @@ let
 in {
   boot = {
     kernelPackages = unstable.linuxPackages_xanmod;
-    kernelModules = [ "amdgpu" "binder_linux" ];
+    kernelModules = [ "binder_linux" ];
     supportedFilesystems = [ "btrfs" ];
 
     loader = {

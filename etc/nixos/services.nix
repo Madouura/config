@@ -54,6 +54,13 @@
       enable = true;
       displayManager.gdm.enable = true;
       desktopManager.gnome.enable = true;
+      digimend.enable = true;
+      videoDrivers = [ "amdgpu" ];
+
+      deviceSection = ''
+        Option "TearFree" "true"
+        Option "VariableRefresh" "true"
+      '';
     };
 
     gnome = {

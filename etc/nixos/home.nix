@@ -91,7 +91,7 @@ in {
           package = unstable.chromium;
 
           extensions = [
-            { id = "gphhapmejobijbbhgpjhcjognlahblep"; } # Gnome Shell Integration
+            { id = "cimiefiiaegbelhefglklhhakcgmhkai"; } # Plasma Integration
             { id = "cjpalhdlnbpafiamejdnhcphjbkeiagm"; } # Ublock Origin
             { id = "ponfpcnoihfmfllpaingbgckeeldkhle"; } # Enhancer for YouTube
             { id = "mnjggcdmjocbbbhaepdhchncahnbgone"; } # SponsorBlock for YouTube
