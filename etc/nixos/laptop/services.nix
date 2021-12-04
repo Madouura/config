@@ -115,11 +115,6 @@
     xserver = {
       displayManager.gdm.nvidiaWayland = true;
       videoDrivers = [ "nvidia" ];
-
-      deviceSection = ''
-        Option "TearFree" "true"
-        Option "VariableRefresh" "true"
-      '';
     };
 
     fprintd = {

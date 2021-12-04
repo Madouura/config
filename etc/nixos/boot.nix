@@ -4,9 +4,8 @@ let
 in {
   boot = {
     kernelPackages = unstable.linuxPackages_xanmod;
-    kernelModules = [ "binder_linux" ];
+    kernelModules = [ "amdgpu" "binder_linux" ];
     supportedFilesystems = [ "btrfs" ];
-    initrd.supportedFilesystems = [ "btrfs" ];
 
     loader = {
       efi.canTouchEfiVariables = true;
@@ -15,6 +14,11 @@ in {
         enable = true;
         editor = false;
       };
+    };
+
+    initrd = {
+      availableKernelModules = [ "amdgpu" ];
+      supportedFilesystems = [ "btrfs" ];
     };
   };
 

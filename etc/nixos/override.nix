@@ -21,10 +21,10 @@ in {
   nixpkgs.config = baseConfig // {
     packageOverrides = pkgs: {
       corectrl = unstable.corectrl;
+      waydroid = unstable.waydroid;
       joycond = unstable.joycond;
       mullvad-vpn = unstable.mullvad-vpn;
       steam = unstable.steam;
-      waydroid = unstable.waydroid;
     };
   };
 }
