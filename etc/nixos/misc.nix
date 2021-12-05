@@ -8,9 +8,13 @@ in {
   security.rtkit.enable = true;
   fonts.fonts = with unstable; [ ipafont baekmuk-ttf ];
 
-  environment .variables = {
-    EDITOR = "nano";
-    VISUAL = "nano";
+  environment ={
+    etc."chromium/native-messaging-hosts/org.kde.plasma.browser_integration.json".source = "${unstable.plasma-browser-integration}/etc/chromium/native-messaging-hosts/org.kde.plasma.browser_integration.json";
+
+    variables = {
+      EDITOR = "nano";
+      VISUAL = "nano";
+    };
   };
 
   hardware = {
