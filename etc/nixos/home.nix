@@ -15,10 +15,8 @@ in {
 
         packages = with unstable; [
           # Utilities
-          wine
           neofetch
           appimage-run
-          gnome3.gnome-tweaks
           flips
           protonup
           virt-manager
@@ -31,31 +29,43 @@ in {
           discord
           qbittorrent
           mullvad-vpn
+          akonadi
+          kmail
 
           # Media
           ffmpeg
           youtube-dl
           easyeffects
-          gimp
+          krita
 
           # Games
-          steam-run-native
           yuzu-ea
           ares
-        ];
+        ] ++ (with unstable.libsForQt5.kdeApplications; [
+          akonadiconsole
+          akonadi-search
+          ark
+        ]);
       };
 
-      services.mpd = {
-        enable = true;
-        package = unstable.mpd;
-        musicDirectory = /home/mado/Music;
+      services = {
+        mpd = {
+          enable = true;
+          package = unstable.mpd;
+          musicDirectory = /home/mado/Music;
 
-        extraConfig = ''
-          audio_output {
-            type            "pipewire"
-            name            "PipeWire Sound Server"
-          }
-        '';
+          extraConfig = ''
+            audio_output {
+              type            "pipewire"
+              name            "PipeWire Sound Server"
+            }
+          '';
+        };
+
+        kdeconnect = {
+          enable = true;
+          indicator = true;
+        };
       };
 
       programs = {
@@ -84,6 +94,11 @@ in {
           enable = true;
           userName = "Madoura";
           userEmail = "madouura@gmail.com";
+
+          signing = {
+            key = "5B53F7EC7FBF8D5AD167B6BE9BC97CA5D2090E8B";
+            signByDefault = true;
+          };
         };
 
         chromium = {

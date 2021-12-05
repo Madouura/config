@@ -30,7 +30,6 @@
     ./laptop/network.nix
     ./laptop/override.nix
     ./laptop/packages.nix
-    ./laptop/programs.nix
     ./laptop/services.nix
 
     ## External ##
@@ -49,6 +48,6 @@
   users.users.mado = {
     isNormalUser = true;
     description = "Madoura";
-    extraGroups = [ "wheel" "corectrl" ];
+    extraGroups = [ "wheel" "libvirtd" "networkmanager" "corectrl" ];
   };
 }

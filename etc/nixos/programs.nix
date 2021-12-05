@@ -4,6 +4,7 @@
     dconf.enable = true;
     corectrl.enable = true;
     steam.enable = true;
+    gnupg.agent.enable = true;
 
     nano = {
       syntaxHighlight = true;

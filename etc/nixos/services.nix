@@ -53,19 +53,18 @@
     xserver = {
       enable = true;
       displayManager.gdm.enable = true;
-      desktopManager.gnome.enable = true;
       digimend.enable = true;
       videoDrivers = [ "amdgpu" ];
+
+      desktopManager.plasma5 = {
+        enable = true;
+        useQtScaling = true;
+      };
 
       deviceSection = ''
         Option "TearFree" "true"
         Option "VariableRefresh" "true"
       '';
-    };
-
-    gnome = {
-      chrome-gnome-shell.enable = true;
-      gnome-keyring.enable = true;
     };
   };
 }

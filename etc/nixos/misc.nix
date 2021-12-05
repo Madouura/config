@@ -5,10 +5,9 @@ in {
   time.timeZone = "America/Chicago";
   zramSwap.enable = true;
   powerManagement.cpuFreqGovernor = "ondemand";
-  security.rtkit.enable = true;
   fonts.fonts = with unstable; [ ipafont baekmuk-ttf ];
 
-  environment ={
+  environment = {
     etc."chromium/native-messaging-hosts/org.kde.plasma.browser_integration.json".source = "${unstable.plasma-browser-integration}/etc/chromium/native-messaging-hosts/org.kde.plasma.browser_integration.json";
 
     variables = {
@@ -22,12 +21,22 @@ in {
     enableRedistributableFirmware = true;
     xpadneo.enable = true;
     pulseaudio.enable = false;
+    bluetooth.enable = true;
 
     opengl = {
       driSupport32Bit = true;
-      extraPackages = with unstable; [ amdvlk ];
       extraPackages32 = with unstable; [ driversi686Linux.amdvlk ];
+
+      extraPackages = with unstable; [
+        amdvlk
+        rocm-opencl-icd
+      ];
     };
+  };
+
+  security = {
+    rtkit.enable = true;
+    pam.services."mado".enableKwallet = true;
   };
 
   virtualisation = {
