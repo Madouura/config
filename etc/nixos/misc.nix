@@ -36,7 +36,11 @@ in {
 
   security = {
     rtkit.enable = true;
-    pam.services."mado".enableKwallet = true;
+
+    pam.services."mado" = {
+      gnupg.enable = true;
+      enableKwallet = true;
+    };
   };
 
   virtualisation = {
