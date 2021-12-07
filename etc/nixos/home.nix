@@ -31,6 +31,8 @@ in {
           mullvad-vpn
           akonadi
           kmail
+          thunderbird
+          birdtray
 
           # Media
           ffmpeg
@@ -94,11 +96,7 @@ in {
           enable = true;
           userName = "Madoura";
           userEmail = "madouura@gmail.com";
-
-          signing = {
-            key = "5B53F7EC7FBF8D5AD167B6BE9BC97CA5D2090E8B";
-            signByDefault = true;
-          };
+          signing.signByDefault = true;
         };
 
         chromium = {

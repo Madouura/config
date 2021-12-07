@@ -1,5 +1,5 @@
 {
-  fileSystems."/mnt/store".options = [ "compress=zstd" "noatime" ];
+  fileSystems."/mnt/stor".options = [ "compress=zstd" "noatime" ];
 
   boot = {
     kernelParams = [ "iommu=pt" ];
@@ -8,7 +8,7 @@
 
     initrd = {
       availableKernelModules = [ "vfio-pci" ];
-      luks.devices."cryptwrot".device = "/dev/disk/by-uuid/7d93a38e-8320-452a-9868-64f6bfdf0b2d";
+      luks.devices."cryptroot1".device = "/dev/disk/by-uuid/1c0fe352-b515-4610-90ff-9832c233710e";
 
       preDeviceCommands = ''
         DEVS="0000:10:00.0 0000:10:00.1"

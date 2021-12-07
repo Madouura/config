@@ -1,0 +1,1 @@
+/etc/nixos/desktop/hardware-configuration.nix
