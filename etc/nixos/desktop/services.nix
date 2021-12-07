@@ -11,7 +11,6 @@ in {
         pipewire = {
           "context.properties" = {
             "default.clock.rate" = 192000;
-            "default.clock.max-quantum" = 1024;
           };
         };
 
@@ -19,17 +18,17 @@ in {
           "context.modules" = [
             {
               args = {
-                "pulse.min.req" = "256/192000";
-                "pulse.default.req" = "256/192000";
-                "pulse.max.req" = "256/192000";
-                "pulse.min.quantum" = "256/192000";
-                "pulse.max.quantum" = "256/192000";
+                "pulse.min.req" = "512/192000";
+                "pulse.default.req" = "512/192000";
+                "pulse.max.req" = "512/192000";
+                "pulse.min.quantum" = "512/192000";
+                "pulse.max.quantum" = "512/192000";
               };
             }
           ];
 
           "stream.properties" = {
-            "node.latency" = "256/192000";
+            "node.latency" = "512/192000";
           };
         };
       };

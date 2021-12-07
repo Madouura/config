@@ -17,8 +17,9 @@
           "context.properties" = {
             "link.max-buffers" = 16;
             "log.level" = 2;
-            "default.clock.quantum" = 256;
+            "default.clock.quantum" = 512;
             "default.clock.min-quantum" = 32;
+            "default.clock.max-quantum" = 1024;
             "core.daemon" = true;
             "core.name" = "pipewire-0";
           };
@@ -104,7 +105,7 @@
 
               actions = {
                 update-props = {
-                  "api.alsa.period-size" = 256;
+                  "api.alsa.period-size" = 512;
                 };
               };
             }

@@ -9,7 +9,6 @@
         pipewire = {
           "context.properties" = {
             "default.clock.rate" = 48000;
-            "default.clock.max-quantum" = 512;
           };
         };
 
