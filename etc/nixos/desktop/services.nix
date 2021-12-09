@@ -48,16 +48,48 @@ in {
     };
   };
 
-  systemd.services.prepare-ivshmem = {
-    enable = true;
-    description = "Prepare IVSHMEM";
-    wantedBy = [ "multi-user.target" ];
+  systemd.services = {
+    libvirtd.preStart = let
+      qemuHook = unstable.writeScript "qemu-hook" ''
+        #!${unstable.stdenv.shell}
+        GUEST_NAME="$1"
+        OPERATION="$2"
 
-    serviceConfig = {
-      Type = "oneshot";
-      User = "mado";
-      Group = "qemu-libvirtd";
-      ExecStart = "${unstable.coreutils}/bin/dd bs=1M count=16 if=/dev/zero of=/dev/shm/scream-ivshmem";
+        if [ "$GUEST_NAME" == "win11" ]; then
+          if [ "$OPERATION" == "start" ]; then
+            sync
+            echo 3 > /proc/sys/vm/drop_caches
+            sync
+            echo 1 > /proc/sys/vm/compact_memory
+            systemctl set-property --runtime -- user.slice AllowedCPUs=0-7,16-23
+            systemctl set-property --runtime -- system.slice AllowedCPUs=0-7,16-23
+            systemctl set-property --runtime -- init.scope AllowedCPUs=0-7,16-23
+          fi
+
+          if [ "$OPERATION" == "stopped" ]; then
+            systemctl set-property --runtime -- user.slice AllowedCPUs=0-31
+            systemctl set-property --runtime -- system.slice AllowedCPUs=0-31
+            systemctl set-property --runtime -- init.scope AllowedCPUs=0-31
+          fi
+        fi
+      '';
+    in ''
+      mkdir -p /var/lib/libvirt/hooks
+      chmod 755 /var/lib/libvirt/hooks
+      ln -sf ${qemuHook} /var/lib/libvirt/hooks/qemu
+    '';
+
+    prepare-ivshmem = {
+      enable = true;
+      description = "Prepare IVSHMEM";
+      wantedBy = [ "multi-user.target" ];
+
+      serviceConfig = {
+        Type = "oneshot";
+        User = "mado";
+        Group = "qemu-libvirtd";
+        ExecStart = "${unstable.coreutils}/bin/dd bs=1M count=16 if=/dev/zero of=/dev/shm/scream-ivshmem";
+      };
     };
   };
 }
