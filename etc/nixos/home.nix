@@ -21,6 +21,7 @@ in {
           protonup
           virt-manager
           pulseaudio
+          helvum
 
           # Development
           gnumake

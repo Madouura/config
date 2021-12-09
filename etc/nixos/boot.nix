@@ -6,6 +6,7 @@ in {
     kernelPackages = unstable.linuxPackages_xanmod;
     kernelModules = [ "binder_linux" ];
     supportedFilesystems = [ "btrfs" ];
+    extraModprobeConfig = "options kvm_amd nested=1";
 
     loader = {
       efi.canTouchEfiVariables = true;

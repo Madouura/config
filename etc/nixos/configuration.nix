@@ -21,6 +21,7 @@
     ./desktop/home.nix
     ./desktop/misc.nix
     ./desktop/network.nix
+    ./desktop/programs.nix
     ./desktop/services.nix
 
     ## Laptop-specific ##
