@@ -20,6 +20,7 @@ in {
           flips
           protonup
           virt-manager
+          pulseaudio
 
           # Development
           gnumake

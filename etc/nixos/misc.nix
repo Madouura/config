@@ -22,16 +22,7 @@ in {
     xpadneo.enable = true;
     pulseaudio.enable = false;
     bluetooth.enable = true;
-
-    opengl = {
-      driSupport32Bit = true;
-      extraPackages32 = with unstable; [ driversi686Linux.amdvlk ];
-
-      extraPackages = with unstable; [
-        amdvlk
-        rocm-opencl-icd
-      ];
-    };
+    opengl.driSupport32Bit = true;
   };
 
   security = {
