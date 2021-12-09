@@ -1,4 +1,7 @@
-{
+let
+  baseConfig = { allowUnfree = true; };
+  unstable = import <nixos-unstable> { config = baseConfig; };
+in {
   services = {
     timesyncd.enable = true;
     cron.enable = true;
@@ -8,6 +11,7 @@
 
     pipewire = {
       enable = true;
+      package = unstable.pipewire;
       alsa.enable = true;
       alsa.support32Bit = true;
       pulse.enable = true;
@@ -129,45 +133,50 @@
         };
       };
 
-      media-session.config = {
-        alsa-monitor = {
-          rules = [
+      media-session = {
+        enable = true;
+        package = unstable.pipewire-media-session;
+
+        config = {
+          alsa-monitor = {
+            rules = [
+              {
+                matches = [ { "node.name" = "alsa_output.*"; } ];
+
+                actions = {
+                  update-props = {
+                    "api.alsa.period-size" = 512;
+                  };
+                };
+              }
+            ];
+          };
+
+          bluez-monitor.rules = [
             {
-              matches = [ { "node.name" = "alsa_output.*"; } ];
+              matches = [ { "device.name" = "~bluez_card.*"; } ];
 
               actions = {
-                update-props = {
-                  "api.alsa.period-size" = 512;
+                "update-props" = {
+                  "bluez5.reconnect-profiles" = [ "hfp_hf" "hsp_hs" "a2dp_sink" ];
+                  "bluez5.msbc-support" = true;
+                  "bluez5.sbc-xq-support" = true;
                 };
+              };
+            }
+
+            {
+              matches = [
+                { "node.name" = "~bluez_input.*"; }
+                { "node.name" = "~bluez_output.*"; }
+              ];
+
+              actions = {
+                "node.pause-on-idle" = false;
               };
             }
           ];
         };
-
-        bluez-monitor.rules = [
-          {
-            matches = [ { "device.name" = "~bluez_card.*"; } ];
-
-            actions = {
-              "update-props" = {
-                "bluez5.reconnect-profiles" = [ "hfp_hf" "hsp_hs" "a2dp_sink" ];
-                "bluez5.msbc-support" = true;
-                "bluez5.sbc-xq-support" = true;
-              };
-            };
-          }
-
-          {
-            matches = [
-              { "node.name" = "~bluez_input.*"; }
-              { "node.name" = "~bluez_output.*"; }
-            ];
-
-            actions = {
-              "node.pause-on-idle" = false;
-            };
-          }
-        ];
       };
     };
 

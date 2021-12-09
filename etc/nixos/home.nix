@@ -41,6 +41,7 @@ in {
           youtube-dl
           easyeffects
           krita
+          obs-studio
 
           # Games
           yuzu-ea

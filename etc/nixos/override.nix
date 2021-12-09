@@ -8,6 +8,8 @@ in {
     <nixos-unstable/nixos/modules/virtualisation/waydroid.nix>
     <nixos-unstable/nixos/modules/services/hardware/joycond.nix>
     <nixos-unstable/nixos/modules/services/networking/mullvad-vpn.nix>
+    <nixos-unstable/nixos/modules/services/desktops/pipewire/pipewire.nix>
+    <nixos-unstable/nixos/modules/services/desktops/pipewire/pipewire-media-session.nix>
   ];
 
   disabledModules = [
@@ -16,6 +18,8 @@ in {
     "virtualisation/waydroid.nix"
     "services/hardware/joycond.nix"
     "services/networking/mullvad-vpn.nix"
+    "services/desktops/pipewire/pipewire.nix"
+    "services/desktops/pipewire/pipewire-media-session.nix"
   ];
 
   nixpkgs.config = baseConfig // {
