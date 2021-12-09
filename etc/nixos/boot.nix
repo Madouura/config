@@ -5,6 +5,8 @@ in {
   boot = {
     kernelPackages = unstable.linuxPackages_xanmod;
     kernelModules = [ "binder_linux" ];
+    kernelParams = [ "iommu=pt" ];
+    kernel.sysctl = { "kernel.sysrq" = 1; };
     supportedFilesystems = [ "btrfs" ];
     extraModprobeConfig = "options kvm_amd nested=1";
 

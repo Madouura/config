@@ -2,8 +2,6 @@
   fileSystems."/mnt/stor".options = [ "compress=zstd" "noatime" ];
 
   boot = {
-    kernelParams = [ "iommu=pt" ];
-    kernel.sysctl = { "kernel.sysrq" = 1; };
     kernelModules = [ "nct6775" "jc42" ];
 
     initrd = {
