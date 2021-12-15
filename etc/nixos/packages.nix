@@ -7,5 +7,16 @@ in {
     lm_sensors
     htop
     nload
+    unrar
+    unar
+
+    (unstable.stdenv.mkDerivation {
+      name = "virtiofsd-link";
+
+      buildCommand = ''
+        mkdir -p $out/bin
+        ln -s ${unstable.qemu}/libexec/virtiofsd $out/bin/
+      '';
+    })
   ];
 }

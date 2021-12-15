@@ -1,5 +1,5 @@
 {
-  fileSystems."/mnt/stor".options = [ "compress=zstd" "noatime" ];
+  fileSystems."/mnt/stor".options = [ "compress=zstd" "autodefrag" "noatime" ];
 
   boot = {
     kernelModules = [ "nct6775" "jc42" ];

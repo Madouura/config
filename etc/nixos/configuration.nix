@@ -50,6 +50,6 @@
   users.users.mado = {
     isNormalUser = true;
     description = "Madoura";
-    extraGroups = [ "wheel" "libvirtd" "networkmanager" "corectrl" "audio" ];
+    extraGroups = [ "wheel" "libvirtd" "networkmanager" "corectrl" "audio" "qemu-libvirtd" ];
   };
 }

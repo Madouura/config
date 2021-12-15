@@ -26,9 +26,9 @@ in {
   };
 
   fileSystems = {
-    "/".options = [ "compress=zstd" "discard" "noatime" ];
-    "/home".options = [ "compress=zstd" "discard" "noatime" ];
-    "/.snapshots".options = [ "compress=zstd" "discard" "noatime" ];
-    "/var/log".options = [ "compress=zstd" "discard" "noatime" ];
+    "/".options = [ "compress=zstd" "autodefrag" "discard=async" "noatime" ];
+    "/home".options = [ "compress=zstd" "autodefrag" "discard=async" "noatime" ];
+    "/.snapshots".options = [ "compress=zstd" "autodefrag" "discard=async" "noatime" ];
+    "/var/log".options = [ "compress=zstd" "autodefrag" "discard=async" "noatime" ];
   };
 }
