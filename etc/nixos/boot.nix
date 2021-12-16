@@ -6,8 +6,7 @@
     kernelParams = [ "iommu=pt" ];
     kernelModules = [ "binder_linux" ];
     kernel.sysctl = { "kernel.sysrq" = 1; };
-    initrd.availableKernelModules = [ "amdgpu" ];
-
+    initrd.availableKernelModules = [ "vfio-pci" "amdgpu" ];
 
     loader = {
       efi.canTouchEfiVariables = true;

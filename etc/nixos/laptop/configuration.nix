@@ -1,3 +1,7 @@
 {
-  imports = [ ../services/tetrd.nix ];
+  imports = [
+    ../services/tetrd.nix
+    ../misc/asusctl.nix
+    ../misc/supergfxctl.nix
+  ];
 }

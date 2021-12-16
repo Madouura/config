@@ -3,6 +3,7 @@
 {
   services = {
     tetrd.enable = true;
+    asusctl.enable = true;
 
     pipewire = {
       config = {
@@ -54,4 +55,34 @@
       };
     };
   };
+
+  systemd.services.libvirtd.preStart = let
+    qemuHook = pkgs.writeScript "qemu-hook" ''
+      #!${pkgs.stdenv.shell}
+      GUEST_NAME="$1"
+      OPERATION="$2"
+
+      if [ "$GUEST_NAME" == "win11" ]; then
+        if [ "$OPERATION" == "start" ]; then
+          sync
+          echo 3 > /proc/sys/vm/drop_caches
+          sync
+          echo 1 > /proc/sys/vm/compact_memory
+          systemctl set-property --runtime -- user.slice AllowedCPUs=0-3
+          systemctl set-property --runtime -- system.slice AllowedCPUs=0-3
+          systemctl set-property --runtime -- init.scope AllowedCPUs=0-3
+        fi
+
+        if [ "$OPERATION" == "stopped" ]; then
+          systemctl set-property --runtime -- user.slice AllowedCPUs=0-15
+          systemctl set-property --runtime -- system.slice AllowedCPUs=0-15
+          systemctl set-property --runtime -- init.scope AllowedCPUs=0-15
+        fi
+      fi
+    '';
+  in ''
+    mkdir -p /var/lib/libvirt/hooks
+    chmod 755 /var/lib/libvirt/hooks
+    ln -sf ${qemuHook} /var/lib/libvirt/hooks/qemu
+  '';
 }
