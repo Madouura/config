@@ -14,35 +14,23 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/mapper/cryptroot0";
-      fsType = "btrfs";
-      options = [ "subvol=@" ];
+    { device = "/dev/disk/by-uuid/29566277-c617-4289-9e84-f9126bc38228";
+      fsType = "ext4";
     };
 
-  boot.initrd.luks.devices."cryptroot0".device = "/dev/disk/by-uuid/cd56be7b-d4ec-4d51-8dcd-e7cf1f915136";
-
-  fileSystems."/var/log" =
-    { device = "/dev/mapper/cryptroot0";
-      fsType = "btrfs";
-      options = [ "subvol=@var_log" ];
-    };
-
-  fileSystems."/.snapshots" =
-    { device = "/dev/mapper/cryptroot0";
-      fsType = "btrfs";
-      options = [ "subvol=@snapshots" ];
-    };
-
-  fileSystems."/home" =
-    { device = "/dev/mapper/cryptroot0";
-      fsType = "btrfs";
-      options = [ "subvol=@home" ];
-    };
+  boot.initrd.luks.devices."cryptroot".device = "/dev/disk/by-uuid/365bc972-b489-4dad-b3ce-fb2942a7c991";
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/F0AC-C5F8";
+    { device = "/dev/disk/by-uuid/C7E2-5906";
       fsType = "vfat";
     };
+
+  fileSystems."/mnt/stor" =
+    { device = "/dev/disk/by-uuid/6cd95da2-50fb-41b0-b400-4740186ab9f3";
+      fsType = "ext4";
+    };
+
+  boot.initrd.luks.devices."cryptstor".device = "/dev/disk/by-uuid/0dd67068-99cc-4db6-91c2-78e3960df860";
 
   swapDevices = [ ];
 

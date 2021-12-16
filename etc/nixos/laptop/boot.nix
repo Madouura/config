@@ -1,3 +1,3 @@
 {
-  boot.initrd.luks.devices."cryptroot1".device = "/dev/disk/by-uuid/65472ad7-d590-4e36-af42-678ea65dccec";
+  boot.initrd.luks.devices."cryptwrot".device = "/dev/disk/by-uuid/7128b6e5-af2b-41d8-893a-3252af7a98ec";
 }

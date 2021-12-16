@@ -1,10 +1,6 @@
 { pkgs, ... }:
 
-let
-  baseConfig = { allowUnfree = true; };
-  unstable = import <nixos-unstable> { config = baseConfig; };
-  ares = pkgs.callPackage ./packages/ares.nix { };
-in {
+{
   home-manager = {
     useUserPackages = true;
     useGlobalPkgs = true;
@@ -13,7 +9,7 @@ in {
       home = {
         stateVersion = "21.11";
 
-        packages = with unstable; [
+        packages = with pkgs; [
           # Utilities
           neofetch
           appimage-run
@@ -31,55 +27,36 @@ in {
           discord
           qbittorrent
           mullvad-vpn
-          akonadi
-          kmail
-          thunderbird
-          birdtray
 
           # Media
           ffmpeg
           youtube-dl
           easyeffects
-          krita
           obs-studio
+          gimp
 
           # Games
           yuzu-ea
-          ares
-        ] ++ (with unstable.libsForQt5.kdeApplications; [
-          akonadiconsole
-          akonadi-search
-          ark
-        ]);
+          ( pkgs.callPackage ./packages/ares.nix { } )
+        ];
       };
 
-      services = {
-        mpd = {
-          enable = true;
-          package = unstable.mpd;
-          musicDirectory = /home/mado/Music;
+      services.mpd = {
+        enable = true;
+        musicDirectory = /home/mado/Music;
 
-          extraConfig = ''
-            audio_output {
-              type            "pipewire"
-              name            "PipeWire Sound Server"
-            }
-          '';
-        };
-
-        kdeconnect = {
-          enable = true;
-          indicator = true;
-        };
+        extraConfig = ''
+          audio_output {
+            type            "pipewire"
+            name            "PipeWire Sound Server"
+          }
+        '';
       };
 
       programs = {
         home-manager.enable = true;
-
-        ncmpcpp = {
-          enable = true;
-          package = unstable.ncmpcpp;
-        };
+        ncmpcpp.enable = true;
+        vscode.enable = true;
 
         bash = {
           enable = true;
@@ -89,10 +66,6 @@ in {
             nupgrade = "nix-channel --update && sudo nixos-rebuild switch --upgrade";
             ncollect = "sudo nix-collect-garbage -d";
           };
-
-          bashrcExtra = ''
-            export XDG_DATA_HOME="/home/mado/.local/share"
-          '';
         };
 
         git = {
@@ -104,10 +77,9 @@ in {
 
         chromium = {
           enable = true;
-          package = unstable.chromium;
 
           extensions = [
-            { id = "cimiefiiaegbelhefglklhhakcgmhkai"; } # Plasma Integration
+            { id = "gphhapmejobijbbhgpjhcjognlahblep"; } # Gnome Shell Integration
             { id = "cjpalhdlnbpafiamejdnhcphjbkeiagm"; } # Ublock Origin
             { id = "ponfpcnoihfmfllpaingbgckeeldkhle"; } # Enhancer for YouTube
             { id = "mnjggcdmjocbbbhaepdhchncahnbgone"; } # SponsorBlock for YouTube
@@ -120,7 +92,6 @@ in {
 
         mpv = {
           enable = true;
-          package = unstable.mpv;
           defaultProfiles = [ "gpu-hq" ];
 
           config = {
@@ -135,11 +106,6 @@ in {
             screenshot-template = "%F (%p)";
             screenshot-directory = "/home/mado/Pictures/Screenshots";
           };
-        };
-
-        vscode = {
-          enable = true;
-          package = unstable.vscodium;
         };
       };
 

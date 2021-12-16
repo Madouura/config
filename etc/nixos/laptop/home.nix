@@ -1,3 +1,3 @@
 {
-  home-manager.users.mado.programs.signing.git.key = "5B53F7EC7FBF8D5AD167B6BE9BC97CA5D2090E8B";
+  home-manager.users.mado.programs.git.signing.key = "1387A0D7B0C97D0F8B1B233EC68C9C839D6C7E51";
 }

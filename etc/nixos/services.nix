@@ -1,7 +1,6 @@
-let
-  baseConfig = { allowUnfree = true; };
-  unstable = import <nixos-unstable> { config = baseConfig; };
-in {
+{ pkgs, ... }:
+
+{
   services = {
     timesyncd.enable = true;
     cron.enable = true;
@@ -9,9 +8,28 @@ in {
     mullvad-vpn.enable = true;
     joycond.enable = true;
 
+    # Ports: 9050, 9063, 8118
+    tor = {
+      enable = true;
+      client.enable = true;
+      torsocks.enable = true;
+    };
+
+    xserver = {
+      enable = true;
+      displayManager.gdm.enable = true;
+      desktopManager.gnome.enable = true;
+      digimend.enable = true;
+      videoDrivers = [ "amdgpu" ];
+
+      deviceSection = ''
+        Option "TearFree"        "true"
+        Option "VariableRefresh" "true"
+      '';
+    };
+
     pipewire = {
       enable = true;
-      package = unstable.pipewire;
       alsa.enable = true;
       alsa.support32Bit = true;
       pulse.enable = true;
@@ -22,7 +40,7 @@ in {
           "context.properties" = {
             "link.max-buffers" = 16;
             "log.level" = 2;
-            "default.clock.quantum" = 512;
+            "default.clock.quantum" = 256;
             "default.clock.min-quantum" = 32;
             "default.clock.max-quantum" = 1024;
             "core.daemon" = true;
@@ -135,7 +153,6 @@ in {
 
       media-session = {
         enable = true;
-        package = unstable.pipewire-media-session;
 
         config = {
           alsa-monitor = {
@@ -145,7 +162,7 @@ in {
 
                 actions = {
                   update-props = {
-                    "api.alsa.period-size" = 512;
+                    "api.alsa.period-size" = 256;
                   };
                 };
               }
@@ -178,30 +195,6 @@ in {
           ];
         };
       };
-    };
-
-    # Ports: 9050, 9063, 8118
-    tor = {
-      enable = true;
-      client.enable = true;
-      torsocks.enable = true;
-    };
-
-    xserver = {
-      enable = true;
-      displayManager.gdm.enable = true;
-      digimend.enable = true;
-      videoDrivers = [ "amdgpu" ];
-
-      desktopManager.plasma5 = {
-        enable = true;
-        useQtScaling = true;
-      };
-
-      deviceSection = ''
-        Option "TearFree" "true"
-        Option "VariableRefresh" "true"
-      '';
     };
   };
 }

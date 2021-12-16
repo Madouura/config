@@ -1,14 +1,13 @@
-let
-  baseConfig = { allowUnfree = true; };
-  unstable = import <nixos-unstable> { config = baseConfig; };
-in {
+{ pkgs, ... }:
+
+{
   boot = {
-    kernelPackages = unstable.linuxPackages_xanmod;
-    kernelModules = [ "binder_linux" ];
+    kernelPackages = pkgs.linuxPackages_xanmod;
     kernelParams = [ "iommu=pt" ];
+    kernelModules = [ "binder_linux" ];
     kernel.sysctl = { "kernel.sysrq" = 1; };
-    supportedFilesystems = [ "btrfs" ];
-    extraModprobeConfig = "options kvm_amd nested=1";
+    initrd.availableKernelModules = [ "amdgpu" ];
+
 
     loader = {
       efi.canTouchEfiVariables = true;
@@ -18,17 +17,11 @@ in {
         editor = false;
       };
     };
-
-    initrd = {
-      availableKernelModules = [ "amdgpu" ];
-      supportedFilesystems = [ "btrfs" ];
-    };
   };
 
   fileSystems = {
-    "/".options = [ "compress=zstd" "autodefrag" "discard=async" "noatime" ];
-    "/home".options = [ "compress=zstd" "autodefrag" "discard=async" "noatime" ];
-    "/.snapshots".options = [ "compress=zstd" "autodefrag" "discard=async" "noatime" ];
-    "/var/log".options = [ "compress=zstd" "autodefrag" "discard=async" "noatime" ];
+    "/".options = [ "discard" "noatime" "commit=60" "barrier=0" ];
+    "/mnt/stor".options = [ "discard" "noatime" "commit=60" "barrier=0" ];
+    "/boot".options = [ "discard" ];
   };
 }

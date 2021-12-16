@@ -1,22 +1,21 @@
-let
-  baseConfig = { allowUnfree = true; };
-  unstable = import <nixos-unstable> { config = baseConfig; };
-in {
-  environment.systemPackages = with unstable; [
+{ pkgs, ... }:
+
+{
+  environment.systemPackages = with pkgs; [
     # Utilities
     lm_sensors
     htop
     nload
-    unrar
-    unar
 
-    (unstable.stdenv.mkDerivation {
-      name = "virtiofsd-link";
+    ( # Manually link virtiofsd
+      pkgs.stdenv.mkDerivation {
+        name = "virtiofsd-link";
 
-      buildCommand = ''
-        mkdir -p $out/bin
-        ln -s ${unstable.qemu}/libexec/virtiofsd $out/bin/
-      '';
-    })
+        buildCommand = ''
+          mkdir -p $out/bin
+          ln -s ${pkgs.qemu}/libexec/virtiofsd $out/bin/
+        '';
+      }
+    )
   ];
 }
