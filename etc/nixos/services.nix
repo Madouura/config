@@ -8,6 +8,10 @@
     mullvad-vpn.enable = true;
     joycond.enable = true;
 
+    udev.extraRules = ''
+      SUBSYSTEM=="kvmfr", OWNER="user", GROUP="kvm", MODE="0660"
+    '';
+
     # Ports: 9050, 9063, 8118
     tor = {
       enable = true;

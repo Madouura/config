@@ -1,12 +1,13 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
   boot = {
     kernelPackages = pkgs.linuxPackages_xanmod;
     kernelParams = [ "iommu=pt" ];
-    kernelModules = [ "binder_linux" ];
+    kernelModules = [ "binder_linux" "kvmfr" ];
+    extraModulePackages = with config.boot.kernelPackages; [ kvmfr ];
     kernel.sysctl = { "kernel.sysrq" = 1; };
-    initrd.availableKernelModules = [ "vfio-pci" "amdgpu" ];
+    initrd.availableKernelModules = [ "amdgpu" ];
 
     loader = {
       efi.canTouchEfiVariables = true;

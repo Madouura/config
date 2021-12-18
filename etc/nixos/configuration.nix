@@ -29,6 +29,7 @@
     ./laptop/home.nix
     ./laptop/misc.nix
     ./laptop/network.nix
+    ./laptop/packages.nix
     ./laptop/services.nix
 
     ## External ##
@@ -47,6 +48,6 @@
   users.users.mado = {
     isNormalUser = true;
     description = "Madoura";
-    extraGroups = [ "wheel" "libvirtd" "networkmanager" "corectrl" "audio" "qemu-libvirtd" ];
+    extraGroups = [ "wheel" "libvirtd" "networkmanager" "corectrl" "audio" "qemu-libvirtd" "kvm" ];
   };
 }

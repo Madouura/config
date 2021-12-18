@@ -1,15 +1,20 @@
 {
-  boot.initrd = {
-    luks.devices."cryptwrot".device = "/dev/disk/by-uuid/7128b6e5-af2b-41d8-893a-3252af7a98ec";
+  boot = {
+    extraModprobeConfig = "options kvmfr static_size_mb=16";
 
-    preDeviceCommands = ''
-      DEVS="0000:01:00.0 0000:01:00.1"
+    initrd = {
+      availableKernelModules = [ "vfio-pci" ];
+      luks.devices."cryptwrot".device = "/dev/disk/by-uuid/7128b6e5-af2b-41d8-893a-3252af7a98ec";
 
-      for DEV in $DEVS; do
-        echo "vfio-pci" > /sys/bus/pci/devices/$DEV/driver_override
-      done
+      preDeviceCommands = ''
+        DEVS="0000:01:00.0 0000:01:00.1"
 
-      modprobe -i vfio-pci
-    '';
+        for DEV in $DEVS; do
+          echo "vfio-pci" > /sys/bus/pci/devices/$DEV/driver_override
+        done
+
+        modprobe -i vfio-pci
+      '';
+    };
   };
 }

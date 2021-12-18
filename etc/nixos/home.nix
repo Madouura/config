@@ -18,6 +18,7 @@
           virt-manager
           pulseaudio
           helvum
+          looking-glass-client
 
           # Development
           gnumake

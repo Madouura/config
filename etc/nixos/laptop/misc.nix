@@ -3,6 +3,22 @@
 {
   security.pam.services."mado".fprintAuth = true;
 
+#  hardware.nvidia = {
+#    modesetting.enable = true;
+#    nvidiaPersistenced = true;
+
+#    powerManagement = {
+#      enable = true;
+#      finegrained = true;
+#    };
+
+#    prime = {
+#      offload.enable = true;
+#      nvidiaBusId = "PCI:1:0:0";
+#      amdgpuBusId = "PCI:7:0:0";
+#    };
+#  };
+
   systemd.tmpfiles.rules = [
     "L+ /run/gdm/.config/monitors.xml - - - - ${pkgs.writeText "gdm-monitors.xml" ''
       <monitors version="2">

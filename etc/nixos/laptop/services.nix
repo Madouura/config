@@ -2,8 +2,8 @@
 
 {
   services = {
-    tetrd.enable = true;
     asusctl.enable = true;
+    tetrd.enable = true;
 
     pipewire = {
       config = {
@@ -46,6 +46,11 @@
       };
     };
 
+#    xserver = {
+#      displayManager.gdm.nvidiaWayland = true;
+#      videoDrivers = [ "nvidia" ];
+#    };
+
     fprintd = {
       enable = true;
 
@@ -63,7 +68,8 @@
       OPERATION="$2"
 
       if [ "$GUEST_NAME" == "win11" ]; then
-        if [ "$OPERATION" == "start" ]; then
+        if [ "$OPERATION" == "prepare" ]; then
+          chown mado:kvm /dev/kvmfr0
           sync
           echo 3 > /proc/sys/vm/drop_caches
           sync
@@ -73,7 +79,7 @@
           systemctl set-property --runtime -- init.scope AllowedCPUs=0-3
         fi
 
-        if [ "$OPERATION" == "stopped" ]; then
+        if [ "$OPERATION" == "release" ]; then
           systemctl set-property --runtime -- user.slice AllowedCPUs=0-15
           systemctl set-property --runtime -- system.slice AllowedCPUs=0-15
           systemctl set-property --runtime -- init.scope AllowedCPUs=0-15

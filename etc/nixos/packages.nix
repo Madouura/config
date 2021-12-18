@@ -6,6 +6,8 @@
     lm_sensors
     htop
     nload
+    ebtables
+    dnsmasq
 
     ( # Manually link virtiofsd
       pkgs.stdenv.mkDerivation {
