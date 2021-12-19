@@ -3,6 +3,7 @@
 
   boot = {
     kernelModules = [ "nct6775" "jc42" ];
+    extraModprobeConfig = "options kvmfr static_size_mb=64";
 
     initrd = {
       availableKernelModules = [ "vfio-pci" ];

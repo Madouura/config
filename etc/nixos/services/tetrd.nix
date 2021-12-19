@@ -6,25 +6,42 @@ in {
   options.services.tetrd.enable = mkEnableOption tetrd.meta.description;
 
   config = mkIf config.services.tetrd.enable {
-    environment.systemPackages = [ pkgs.nettools tetrd ];
+    environment.systemPackages = [ tetrd ];
 
-    systemd = {
-      # Seems to need root access for /run/tetrd.sock, which seems to be hard-coded
-      services.tetrd = {
-        description = tetrd.meta.description;
-        wantedBy = [ "multi-user.target" ];
+    systemd.services.tetrd = {
+      description = tetrd.meta.description;
+      wantedBy = [ "multi-user.target" ];
 
-        serviceConfig = {
-          ExecStart = "${tetrd}/opt/Tetrd/bin/tetrd";
-          Restart = "always";
-        };
+      preStart = ''
+        mkdir -p /usr/bin
+        ln -sf ${pkgs.nettools}/bin/{route,ifconfig} /usr/bin
+      '';
+
+      serviceConfig = {
+        ExecStart = "${tetrd}/opt/Tetrd/bin/tetrd";
+        Restart = "always";
+        RuntimeDirectory = "tetrd";
+        RootDirectory = "/run/tetrd";
+        DynamicUser = true;
+        PermissionsStartOnly = true;
+        BindReadOnlyPaths = [ builtins.storeDir ];
+
+        CapabilityBoundingSet = [
+          "CAP_DAC_OVERRIDE"
+          "CAP_NET_ADMIN"
+        ];
+
+        AmbientCapabilities = [
+          "CAP_DAC_OVERRIDE"
+          "CAP_NET_ADMIN"
+        ];
+
+        BindPaths = [
+          "/etc"
+          "/run"
+          "/var"
+        ];
       };
-
-      # Unfortunately, it appears these paths are hard-coded in
-      tmpfiles.rules = [
-        "L+ /usr/bin/route - - - - ${pkgs.nettools}/bin/route"
-        "L+ /usr/bin/ifconfig - - - - ${pkgs.nettools}/bin/ifconfig"
-      ];
     };
   };
 }

@@ -22,6 +22,7 @@
 
   virtualisation = {
     waydroid.enable = true;
+    docker.enable = true;
 
     libvirtd = {
       enable = true;

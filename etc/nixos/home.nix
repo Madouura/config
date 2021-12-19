@@ -11,14 +11,12 @@
 
         packages = with pkgs; [
           # Utilities
-          neofetch
           appimage-run
-          flips
-          protonup
           virt-manager
           pulseaudio
           helvum
           looking-glass-client
+          gnome.gnome-tweaks
 
           # Development
           gnumake
@@ -38,7 +36,7 @@
 
           # Games
           yuzu-ea
-          ( pkgs.callPackage ./packages/ares.nix { } )
+#          ares
         ];
       };
 
@@ -88,6 +86,7 @@
             { id = "mpbjkejclgfgadiemmefgebjfooflfhl"; } # Buster Captcha Solver
             { id = "moicohcfhhbmmngneghfjfjpdobmmnlg"; } # LiveTL
             { id = "hkgfoiooedgoejojocmhlaklaeopbecg"; } # Picture in Picture
+            { id = "jinjaccalgkegednnccohejagnlnfdag"; } # Violentmonkey
           ];
         };
 

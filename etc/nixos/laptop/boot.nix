@@ -1,6 +1,6 @@
 {
   boot = {
-    extraModprobeConfig = "options kvmfr static_size_mb=16";
+    extraModprobeConfig = "options kvmfr static_size_mb=32";
 
     initrd = {
       availableKernelModules = [ "vfio-pci" ];
