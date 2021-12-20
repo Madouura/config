@@ -28,6 +28,7 @@
       enable = true;
       onBoot = "ignore";
       onShutdown = "shutdown";
+
       qemu = {
         swtpm.enable = true;
 

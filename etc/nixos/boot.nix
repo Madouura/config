@@ -21,7 +21,6 @@
 
   fileSystems = {
     "/".options = [ "discard" "noatime" "commit=60" "barrier=0" ];
-    "/mnt/stor".options = [ "discard" "noatime" "commit=60" "barrier=0" ];
     "/boot".options = [ "discard" ];
   };
 }

@@ -1,16 +1,14 @@
 {
-  fileSystems."/mnt/stor".options = [ "compress=zstd" "autodefrag" "noatime" ];
-
   boot = {
     kernelModules = [ "nct6775" "jc42" ];
     extraModprobeConfig = "options kvmfr static_size_mb=64";
 
     initrd = {
       availableKernelModules = [ "vfio-pci" ];
-      luks.devices."cryptroot1".device = "/dev/disk/by-uuid/1c0fe352-b515-4610-90ff-9832c233710e";
+      luks.devices."cryptwrot".device = "/dev/disk/by-uuid/1b847317-5ac5-4cf0-982d-88177c18b532";
 
       preDeviceCommands = ''
-        DEVS="0000:10:00.0 0000:10:00.1"
+        DEVS="0000:10:00.0 0000:10:00.1 0000:12:00.3"
 
         for DEV in $DEVS; do
           echo "vfio-pci" > /sys/bus/pci/devices/$DEV/driver_override
@@ -19,5 +17,10 @@
         modprobe -i vfio-pci
       '';
     };
+  };
+
+  fileSystems = {
+    "/mnt/cach".options = [ "discard" "noatime" "commit=60" "barrier=0" ];
+    "/mnt/stor".options = [ "noatime" "commit=60" "barrier=0" ];
   };
 }

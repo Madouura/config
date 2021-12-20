@@ -17,4 +17,8 @@
       '';
     };
   };
+
+  fileSystems = {
+    "/mnt/stor".options = [ "discard" "noatime" "commit=60" "barrier=0" ];
+  };
 }

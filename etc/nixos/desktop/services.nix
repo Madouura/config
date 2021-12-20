@@ -1,10 +1,8 @@
-let
-  baseConfig = { allowUnfree = true; };
-  unstable = import <nixos-unstable> { config = baseConfig; };
-in {
+{ pkgs, ... }:
+
+{
   services = {
-    udev.packages = [ unstable.dolphinEmuMaster ];
-    hardware.xow.enable = true;
+    udev.packages = [ pkgs.dolphinEmuMaster ];
 
     pipewire = {
       config = {
@@ -18,17 +16,17 @@ in {
           "context.modules" = [
             {
               args = {
-                "pulse.min.req" = "512/192000";
-                "pulse.default.req" = "512/192000";
-                "pulse.max.req" = "512/192000";
-                "pulse.min.quantum" = "512/192000";
-                "pulse.max.quantum" = "512/192000";
+                "pulse.min.req" = "256/192000";
+                "pulse.default.req" = "256/192000";
+                "pulse.max.req" = "256/192000";
+                "pulse.min.quantum" = "256/192000";
+                "pulse.max.quantum" = "256/192000";
               };
             }
           ];
 
           "stream.properties" = {
-            "node.latency" = "512/192000";
+            "node.latency" = "256/192000";
           };
         };
       };
@@ -49,13 +47,14 @@ in {
   };
 
   systemd.services.libvirtd.preStart = let
-    qemuHook = unstable.writeScript "qemu-hook" ''
-      #!${unstable.stdenv.shell}
+    qemuHook = pkgs.writeScript "qemu-hook" ''
+      #!${pkgs.stdenv.shell}
       GUEST_NAME="$1"
       OPERATION="$2"
 
       if [ "$GUEST_NAME" == "win11" ]; then
-        if [ "$OPERATION" == "start" ]; then
+        if [ "$OPERATION" == "prepare" ]; then
+          chown mado:kvm /dev/kvmfr0
           sync
           echo 3 > /proc/sys/vm/drop_caches
           sync
@@ -65,7 +64,7 @@ in {
           systemctl set-property --runtime -- init.scope AllowedCPUs=0-7,16-23
         fi
 
-        if [ "$OPERATION" == "stopped" ]; then
+        if [ "$OPERATION" == "release" ]; then
           systemctl set-property --runtime -- user.slice AllowedCPUs=0-31
           systemctl set-property --runtime -- system.slice AllowedCPUs=0-31
           systemctl set-property --runtime -- init.scope AllowedCPUs=0-31
