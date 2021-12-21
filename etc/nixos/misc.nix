@@ -6,6 +6,7 @@
   powerManagement.cpuFreqGovernor = "ondemand";
   fonts.fonts = with pkgs; [ ipafont baekmuk-ttf ];
   security.rtkit.enable = true;
+  systemd.tmpfiles.rules = [ "f /dev/shm/looking-glass 0660 mado kvm -" ];
 
   environment.variables = {
     EDITOR = "nano";
@@ -28,20 +29,7 @@
       enable = true;
       onBoot = "ignore";
       onShutdown = "shutdown";
-
-      qemu = {
-        swtpm.enable = true;
-
-        verbatimConfig = ''
-          namespaces = []
-
-          cgroup_device_acl = [
-            "/dev/null", "/dev/full", "/dev/zero",
-            "/dev/random", "/dev/urandom", "/dev/ptmx",
-            "/dev/kvm", "/dev/rtc", "/dev/hpet", "/dev/kvmfr0"
-          ]
-        '';
-      };
+      qemu.swtpm.enable = true;
     };
   };
 }

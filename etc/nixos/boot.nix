@@ -4,7 +4,7 @@
   boot = {
     kernelPackages = pkgs.linuxPackages_xanmod;
     kernelParams = [ "iommu=pt" ];
-    kernelModules = [ "binder_linux" "kvmfr" ];
+    kernelModules = [ "binder_linux" ];
     extraModulePackages = with config.boot.kernelPackages; [ kvmfr ];
     kernel.sysctl = { "kernel.sysrq" = 1; };
     initrd.availableKernelModules = [ "amdgpu" ];
