@@ -2,11 +2,6 @@
 
 let
   tetrd = pkgs.callPackage ../packages/tetrd.nix { };
-
-  tetrd-init = pkgs.writeShellScript "tetrd-init" ''
-    mkdir -p /usr/bin
-    ln -sf ${pkgs.nettools}/bin/{route,ifconfig} /usr/bin
-  '';
 in {
   options.services.tetrd.enable = lib.mkEnableOption tetrd.meta.description;
 
@@ -18,12 +13,12 @@ in {
       wantedBy = [ "multi-user.target" ];
 
       serviceConfig = {
-        ExecStartPre = "+${tetrd-init}";
         ExecStart = "${tetrd}/opt/Tetrd/bin/tetrd";
         Restart = "always";
         RuntimeDirectory = "tetrd";
         RootDirectory = "/run/tetrd";
         DynamicUser = true;
+        UMask = "006";
         DeviceAllow = "usb_device";
         LockPersonality = true;
         MemoryDenyWriteExecute = true;
@@ -71,6 +66,8 @@ in {
           builtins.storeDir
           "/etc/ssl"
           "/etc/static/ssl"
+          "${pkgs.nettools}/bin/route:/usr/bin/route"
+          "${pkgs.nettools}/bin/ifconfig:/usr/bin/ifconfig"
         ];
 
         BindPaths = [
