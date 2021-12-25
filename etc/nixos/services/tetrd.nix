@@ -1,30 +1,83 @@
 { config, lib, pkgs, ... }:
 
-with lib; let
+let
   tetrd = pkgs.callPackage ../packages/tetrd.nix { };
-in {
-  options.services.tetrd.enable = mkEnableOption tetrd.meta.description;
 
-  config = mkIf config.services.tetrd.enable {
+  tetrd-init = pkgs.writeShellScript "tetrd-init" ''
+    mkdir -p /usr/bin
+    ln -sf ${pkgs.nettools}/bin/{route,ifconfig} /usr/bin
+  '';
+in {
+  options.services.tetrd.enable = lib.mkEnableOption tetrd.meta.description;
+
+  config = lib.mkIf config.services.tetrd.enable {
     environment.systemPackages = [ tetrd ];
 
     systemd.services.tetrd = {
       description = tetrd.meta.description;
       wantedBy = [ "multi-user.target" ];
 
-      preStart = ''
-        mkdir -p /usr/bin
-        ln -sf ${pkgs.nettools}/bin/{route,ifconfig} /usr/bin
-      '';
-
       serviceConfig = {
+        ExecStartPre = "+${tetrd-init}";
         ExecStart = "${tetrd}/opt/Tetrd/bin/tetrd";
         Restart = "always";
         RuntimeDirectory = "tetrd";
         RootDirectory = "/run/tetrd";
         DynamicUser = true;
-        PermissionsStartOnly = true;
-        BindReadOnlyPaths = [ builtins.storeDir ];
+        DeviceAllow = "usb_device";
+        LockPersonality = true;
+        MemoryDenyWriteExecute = true;
+        NoNewPrivileges = true;
+        PrivateMounts = true;
+        PrivateNetwork = lib.mkDefault false;
+        PrivateTmp = true;
+        PrivateUsers = lib.mkDefault false;
+        ProtectClock = lib.mkDefault false;
+        ProtectControlGroups = true;
+        ProtectHome = true;
+        ProtectHostname = true;
+        ProtectKernelLogs = true;
+        ProtectKernelModules = true;
+        ProtectKernelTunables = true;
+        ProtectProc = "invisible";
+        ProtectSystem = "strict";
+        RemoveIPC = true;
+        RestrictAddressFamilies = [ "AF_UNIX" "AF_INET" "AF_INET6" "AF_NETLINK" ];
+        RestrictNamespaces = true;
+        RestrictRealtime = true;
+        RestrictSUIDSGID = true;
+        SystemCallArchitectures = "native";
+
+        SystemCallFilter = [
+          "@system-service"
+          "~@aio"
+          "~@chown"
+          "~@clock"
+          "~@cpu-emulation"
+          "~@debug"
+          "~@keyring"
+          "~@memlock"
+          "~@module"
+          "~@mount"
+          "~@obsolete"
+          "~@pkey"
+          "~@raw-io"
+          "~@reboot"
+          "~@swap"
+          "~@sync"
+        ];
+
+        BindReadOnlyPaths = [
+          builtins.storeDir
+          "/etc/ssl"
+          "/etc/static/ssl"
+        ];
+
+        BindPaths = [
+          "/etc/resolv.conf"
+          "/run"
+          "/var/log"
+        ];
 
         CapabilityBoundingSet = [
           "CAP_DAC_OVERRIDE"
@@ -34,12 +87,6 @@ in {
         AmbientCapabilities = [
           "CAP_DAC_OVERRIDE"
           "CAP_NET_ADMIN"
-        ];
-
-        BindPaths = [
-          "/etc"
-          "/run"
-          "/var"
         ];
       };
     };

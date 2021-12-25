@@ -2,8 +2,9 @@
 
 {
   services = {
-    asusctl.enable = true;
     tetrd.enable = true;
+    asusctl.enable = true;
+    supergfxctl.gfx-vfio-enable = true;
 
     pipewire = {
       config = {
@@ -46,10 +47,10 @@
       };
     };
 
-#    xserver = {
-#      displayManager.gdm.nvidiaWayland = true;
-#      videoDrivers = [ "nvidia" ];
-#    };
+    xserver = {
+      displayManager.gdm.nvidiaWayland = true;
+      videoDrivers = [ "nvidia" ];
+    };
 
     fprintd = {
       enable = true;

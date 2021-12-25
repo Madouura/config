@@ -8,6 +8,7 @@ in {
   nixpkgs.config = {
     packageOverrides = pkgs: {
       libgbinder = unstable.libgbinder;
+      ares = unstable.ares;
     };
   };
 }

@@ -36,7 +36,7 @@
 
           # Games
           yuzu-ea
-#          ares
+          ares
         ];
       };
 
