@@ -1,10 +1,3 @@
-{ pkgs, ... }:
-
 {
-  home-manager = {
-    users.mado = {
-      programs.git.signing.key = "7AB4C6220EADFC24AA32DC66802073DF725597CA";
-      home.packages = [ pkgs.dolphinEmuMaster ];
-    };
-  };
+  home-manager.users.mado.programs.git.signing.key = "7DFD1583D5AC9A61ED3D714C94E0BBB3B85A14FF";
 }

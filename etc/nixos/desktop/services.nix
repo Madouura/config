@@ -2,8 +2,6 @@
 
 {
   services = {
-    udev.packages = [ pkgs.dolphinEmuMaster ];
-
     pipewire = {
       config = {
         pipewire = {
@@ -54,6 +52,7 @@
 
       if [ "$GUEST_NAME" == "win11" ]; then
         if [ "$OPERATION" == "prepare" ]; then
+          chown mado:kvm /dev/kvmfr0
           sync
           echo 3 > /proc/sys/vm/drop_caches
           sync

@@ -1,14 +1,13 @@
 let
-  unstable = import <nixos-unstable> { };
+  small = import <nixos-small> { };
 in {
-  imports = [ ./services/waydroid.nix ];
-  disabledModules = [ "virtualisation/waydroid.nix" ];
-
-  # Until 1.1.14 in release-21.11
+  # Until nixos-21.11 channel updates
   nixpkgs.config = {
     packageOverrides = pkgs: {
-      libgbinder = unstable.libgbinder;
-      ares = unstable.ares;
+      ares = small.ares;
+      bcachefs-tools = small.bcachefs-tools;
+      linux_testing_bcachefs = small.linux_testing_bcachefs;
+      linuxPackages_testing_bcachefs = small.linuxPackages_testing_bcachefs;
     };
   };
 }

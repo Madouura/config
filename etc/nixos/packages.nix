@@ -8,16 +8,5 @@
     nload
     ebtables
     dnsmasq
-
-    ( # Manually link virtiofsd
-      pkgs.stdenv.mkDerivation {
-        name = "virtiofsd-link";
-
-        buildCommand = ''
-          mkdir -p $out/bin
-          ln -s ${pkgs.qemu}/libexec/virtiofsd $out/bin/
-        '';
-      }
-    )
   ];
 }

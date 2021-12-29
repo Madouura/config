@@ -8,36 +8,20 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "vfio_pci" "usbhid" "usb_storage" "sd_mod" ];
+  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "vfio_pci" "usbhid" "usb_storage" "sd_mod" "bcache" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/a4622b96-c210-463e-a4b2-67a5661883bb";
-      fsType = "ext4";
+    { device = "/dev/sda1:/dev/nvme0n1p2:/dev/nvme1n1p1";
+      fsType = "bcachefs";
     };
-
-  boot.initrd.luks.devices."cryptroot".device = "/dev/disk/by-uuid/8ebf7030-0e07-4f1c-9360-978f134b803b";
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/3FD8-70FF";
+    { device = "/dev/disk/by-uuid/8B21-1793";
       fsType = "vfat";
     };
-
-  fileSystems."/mnt/cach" =
-    { device = "/dev/disk/by-uuid/c1badd29-1d38-4e79-b7d5-fc9d5be7afd4";
-      fsType = "ext4";
-    };
-
-  boot.initrd.luks.devices."cryptcach".device = "/dev/disk/by-uuid/0accb21f-76a5-49d7-aa45-865436f04dca";
-
-  fileSystems."/mnt/stor" =
-    { device = "/dev/disk/by-uuid/1f5df18f-710a-45d1-b610-ffe5d25eacd1";
-      fsType = "ext4";
-    };
-
-  boot.initrd.luks.devices."cryptstor".device = "/dev/disk/by-uuid/955aba6f-ffe7-46ae-82b0-d47c46e00295";
 
   swapDevices = [ ];
 

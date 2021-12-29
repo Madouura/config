@@ -1,13 +1,17 @@
-{ config, pkgs, ... }:
+{ config, ... }:
 
 {
   boot = {
-    kernelPackages = pkgs.linuxPackages_xanmod;
     kernelParams = [ "iommu=pt" ];
-    kernelModules = [ "binder_linux" ];
-    extraModulePackages = with config.boot.kernelPackages; [ kvmfr ];
     kernel.sysctl = { "kernel.sysrq" = 1; };
-    initrd.availableKernelModules = [ "amdgpu" ];
+    kernelModules = [ "binder_linux" "kvmfr" ];
+    extraModulePackages = with config.boot.kernelPackages; [ kvmfr ];
+    supportedFilesystems = [ "bcachefs" ];
+
+    initrd = {
+      availableKernelModules = [ "amdgpu" ];
+      supportedFilesystems = [ "bcachefs" ];
+    };
 
     loader = {
       efi.canTouchEfiVariables = true;
@@ -17,10 +21,5 @@
         editor = false;
       };
     };
-  };
-
-  fileSystems = {
-    "/".options = [ "discard" "noatime" "commit=60" "barrier=0" ];
-    "/boot".options = [ "discard" ];
   };
 }

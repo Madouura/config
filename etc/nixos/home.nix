@@ -36,6 +36,7 @@
 
           # Games
           yuzu-ea
+          dolphinEmuMaster
           ares
         ];
       };

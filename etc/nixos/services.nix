@@ -8,6 +8,14 @@
     mullvad-vpn.enable = true;
     joycond.enable = true;
 
+    udev = {
+      packages = [ pkgs.dolphinEmuMaster ];
+
+      extraRules = ''
+        SUBSYSTEM=="kvmfr", OWNER="mado", GROUP="kvm", MODE="0660"
+      '';
+    };
+
     # Ports: 9050, 9063, 8118
     tor = {
       enable = true;
@@ -136,7 +144,7 @@
             { name = "libpipewire-module-adapter"; }
             { name = "libpipewire-module-metadata"; }
 
-            {
+          {
               name = "libpipewire-module-protocol-pulse";
 
               args = {
