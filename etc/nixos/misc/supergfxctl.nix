@@ -1,8 +1,6 @@
 { config, lib, pkgs, ... }:
 
-with lib;
-
-let
+with lib; let
   supergfxctl = pkgs.callPackage ../packages/supergfxctl.nix { };
   cfg = config.services.supergfxctl;
   configFile = pkgs.writeText "supergfxd.conf" (builtins.toJSON ({

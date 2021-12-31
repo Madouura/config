@@ -4,7 +4,11 @@
   services = {
     tetrd.enable = true;
     asusctl.enable = true;
-    supergfxctl.gfx-vfio-enable = true;
+
+    supergfxctl = {
+#      gfx-mode = "Vfio";
+      gfx-vfio-enable = true;
+    };
 
     pipewire = {
       config = {
@@ -70,6 +74,7 @@
 
       if [ "$GUEST_NAME" == "win11" ]; then
         if [ "$OPERATION" == "prepare" ]; then
+          chown mado:kvm /dev/kvmfr0
           sync
           echo 3 > /proc/sys/vm/drop_caches
           sync

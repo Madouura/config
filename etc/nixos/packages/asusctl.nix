@@ -2,18 +2,18 @@
 
 rustPlatform.buildRustPackage rec {
   pname = "asusctl";
-  version = "4.0.6";
+  version = "4.0.7";
 
   src = fetchFromGitLab {
     owner = "asus-linux";
     repo = pname;
     rev = version;
-    sha256 = "0mgyii74chyk5s9hkkggmjv8glkl74b4xzfk6knnv9mirg4sx2s6";
+    sha256 = "13x1g6n5qrwblcyzjzsshvar2h7himryhzg6hnjx7jrkq7wlw1m4";
   };
 
   patches = [
     ./configdir.patch
-    ./statedir.patch
+    ./service.patch
   ];
 
   postPatch = ''
@@ -41,7 +41,7 @@ rustPlatform.buildRustPackage rec {
   nativeBuildInputs = [ pkg-config ];
   buildInputs = [ udev ];
 
-  cargoHash = "sha256-OHg6W4qc3cxMygWfW3OzS3x9aGYocakDxBDZONHV1PI=";
+  cargoHash = "sha256-bFfO6UAje+Wmcfi85IGgzK0GmE16dJxb8xDlcFHrX+M=";
 
   # Use default phases since the build scripts install systemd services, udev rules, ... too
   makeFlags = [ "prefix=${placeholder "out"}" "configdir=${placeholder "out"}/etc" ];
