@@ -6,7 +6,7 @@
     asusctl.enable = true;
 
     supergfxctl = {
-#      gfx-mode = "Vfio";
+      gfx-mode = "Vfio";
       gfx-vfio-enable = true;
     };
 
@@ -49,11 +49,6 @@
           }
         ];
       };
-    };
-
-    xserver = {
-      displayManager.gdm.nvidiaWayland = true;
-      videoDrivers = [ "nvidia" ];
     };
 
     fprintd = {

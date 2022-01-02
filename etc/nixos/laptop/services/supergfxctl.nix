@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 with lib; let
-  supergfxctl = pkgs.callPackage ../packages/supergfxctl.nix { };
+  supergfxctl = pkgs.callPackage ../packages/supergfxctl/default.nix { };
   cfg = config.services.supergfxctl;
   configFile = pkgs.writeText "supergfxd.conf" (builtins.toJSON ({
     gfx_mode = cfg.gfx-mode;

@@ -3,7 +3,6 @@
 {
   time.timeZone = "America/Chicago";
   zramSwap.enable = true;
-  powerManagement.cpuFreqGovernor = "ondemand";
   security.rtkit.enable = true;
   fonts.fonts = with pkgs; [ ipafont baekmuk-ttf ];
 

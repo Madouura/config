@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 with lib; let
-  asusctl = pkgs.callPackage ../packages/asusctl.nix { };
+  asusctl = pkgs.callPackage ../packages/asusctl/default.nix { };
 in {
   ###### interface
 
