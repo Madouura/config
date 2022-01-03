@@ -3,7 +3,8 @@ let
   unstable = import <nixos-unstable> { config = baseConfig; };
 in {
   # Until next NixOS version change
-  imports = [ <nixos-unstable/nixos/modules/services/networking/tetrd.nix> ];
+#  imports = [ <nixos-unstable/nixos/modules/services/networking/tetrd.nix> ];
+  imports = [ ./services/tetrd.nix ];
   disabledModules = [ "services/networking/tetrd.nix" ];
 
   nixpkgs.config = baseConfig // {
