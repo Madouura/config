@@ -8,6 +8,7 @@
     users.mado = {
       home = {
         stateVersion = "21.11";
+        enableNixpkgsReleaseCheck = true;
 
         packages = with pkgs; [
           # Utilities
@@ -39,6 +40,21 @@
           dolphinEmuMaster
           ares
         ];
+
+        file."looking-glass-client" = {
+          target = ".config/looking-glass-client.ini";
+
+          text = ''
+            [app]
+            shmFile = /dev/kvmfr0
+
+            [win]
+            fullScreen = yes
+
+            [spice]
+            enable = no
+          '';
+        };
       };
 
       services.mpd = {

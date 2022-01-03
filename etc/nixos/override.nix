@@ -1,8 +1,8 @@
 let
-  unstable = import <nixos-unstable> { };
+  unstable = import <nixos-unstable-small> { };
 in {
   # Until #153095 merge
-  imports = [ ./stage-1.nix ];
+  imports = [ ./misc/stage-1.nix ];
   disabledModules = [ "system/boot/stage-1.nix" ];
 
   # Until next NixOS version change

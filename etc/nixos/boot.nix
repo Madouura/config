@@ -6,12 +6,7 @@
     kernel.sysctl = { "kernel.sysrq" = 1; };
     kernelModules = [ "binder_linux" "kvmfr" ];
     extraModulePackages = with config.boot.kernelPackages; [ kvmfr ];
-    supportedFilesystems = [ "bcachefs" ];
-
-    initrd = {
-      availableKernelModules = [ "amdgpu" ];
-      supportedFilesystems = [ "bcachefs" ];
-    };
+    initrd.availableKernelModules = [ "amdgpu" ];
 
     loader = {
       efi.canTouchEfiVariables = true;

@@ -1,10 +1,9 @@
 let
   baseConfig = { allowUnfree = true; };
-  unstable = import <nixos-unstable> { config = baseConfig; };
+  unstable = import <nixos-unstable-small> { config = baseConfig; };
 in {
   # Until next NixOS version change
-#  imports = [ <nixos-unstable/nixos/modules/services/networking/tetrd.nix> ];
-  imports = [ ./services/tetrd.nix ];
+  imports = [ <nixos-unstable-small/nixos/modules/services/networking/tetrd.nix> ];
   disabledModules = [ "services/networking/tetrd.nix" ];
 
   nixpkgs.config = baseConfig // {
