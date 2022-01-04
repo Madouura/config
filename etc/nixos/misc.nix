@@ -56,6 +56,7 @@ in {
     pulseaudio.enable = false;
     bluetooth.enable = true;
     opengl.driSupport32Bit = true;
+    xpadneo.enable = true;
   };
 
   virtualisation = {

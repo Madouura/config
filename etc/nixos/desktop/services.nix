@@ -1,7 +1,5 @@
 {
   services = {
-    hardware.xow.enable = true;
-
     pipewire = {
       config = {
         pipewire = {
