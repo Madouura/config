@@ -1,6 +1,20 @@
 { pkgs, ... }:
 
-{
+let
+  win11-vm-start = pkgs.writeShellScript "win11-vm-start.sh" ''
+    supergfxctl -m vfio
+    virsh --connect=qemu:///system start win11
+    looking-glass-client
+
+    while true; do
+      sleep 1
+      virsh --connect=qemu:///system list --name --state-shutoff | grep "win11" &> /dev/null
+      if [ $? == 0 ]; then break; fi
+    done
+
+    supergfxctl -m integrated
+  '';
+in {
   home-manager = {
     useUserPackages = true;
     useGlobalPkgs = true;
@@ -17,6 +31,9 @@
           pulseaudio
           helvum
           looking-glass-client
+          protonup
+          pciutils
+          usbutils
           gnome.gnome-tweaks
 
           # Development
@@ -41,8 +58,8 @@
           ares
         ];
 
-        file."looking-glass-client" = {
-          target = ".config/looking-glass-client.ini";
+        file.looking-glass-client = {
+          target = ".config/looking-glass/client.ini";
 
           text = ''
             [app]
@@ -52,14 +69,14 @@
             fullScreen = yes
 
             [spice]
-            enable = no
+            input = no
           '';
         };
       };
 
       services.mpd = {
         enable = true;
-        musicDirectory = /home/mado/Music;
+        musicDirectory = ~/Music;
 
         extraConfig = ''
           audio_output {
@@ -121,18 +138,27 @@
             alang = "jp,jpn,japan";
             slang = "en,eng,english";
             screenshot-template = "%F (%p)";
-            screenshot-directory = "/home/mado/Pictures/Screenshots";
+            screenshot-directory = "~/Pictures/Screenshots";
           };
         };
       };
 
-      accounts.email.accounts."madouura" = {
+      accounts.email.accounts.madoura = {
         name = "Madoura";
         realName = "Madoura";
         userName = "madouura";
         address = "madouura@gmail.com";
         flavor = "gmail.com";
         primary = true;
+      };
+
+      xdg.desktopEntries.windows-11-virtual-machine = {
+        name = "Windows 11 Virtual Machine";
+        genericName = "Start Windows Gaming VM";
+        comment = "Launches a Windows VM with dedicated graphics for high-performance applications";
+        exec = "${win11-vm-start}";
+        icon = "/etc/nixos/misc/win11.png";
+        type = "Application";
       };
     };
   };
