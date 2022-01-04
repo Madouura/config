@@ -10,10 +10,7 @@
 
     udev = {
       packages = [ pkgs.dolphinEmuMaster ];
-
-      extraRules = ''
-        SUBSYSTEM=="kvmfr", OWNER="mado", GROUP="kvm", MODE="0660"
-      '';
+      extraRules = ''SUBSYSTEM=="kvmfr", OWNER="mado", GROUP="kvm", MODE="0660"'';
     };
 
     # Ports: 9050, 9063, 8118

@@ -1,19 +1,11 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 
 let
-  win11-vm-start = pkgs.writeShellScript "win11-vm-start.sh" ''
-    supergfxctl -m vfio
-    virsh --connect=qemu:///system start win11
-    looking-glass-client
-
-    while true; do
-      sleep 1
-      virsh --connect=qemu:///system list --name --state-shutoff | grep "win11" &> /dev/null
-      if [ $? == 0 ]; then break; fi
-    done
-
-    supergfxctl -m integrated
-  '';
+  lgConfig = pkgs.writeText "looking-glass-client.ini" (lib.generators.toINI { } {
+    app.shmFile = "/dev/kvmfr0";
+    win.fullScreen = "yes";
+    spice.input = "no";
+  });
 in {
   home-manager = {
     useUserPackages = true;
@@ -59,18 +51,8 @@ in {
         ];
 
         file.looking-glass-client = {
+          source = lgConfig;
           target = ".config/looking-glass/client.ini";
-
-          text = ''
-            [app]
-            shmFile = /dev/kvmfr0
-
-            [win]
-            fullScreen = yes
-
-            [spice]
-            input = no
-          '';
         };
       };
 
@@ -156,7 +138,7 @@ in {
         name = "Windows 11 Virtual Machine";
         genericName = "Start Windows Gaming VM";
         comment = "Launches a Windows VM with dedicated graphics for high-performance applications";
-        exec = "${win11-vm-start}";
+        exec = "/home/mado/.local/bin/win11-vm-start.sh";
         icon = "/etc/nixos/misc/win11.png";
         type = "Application";
       };
