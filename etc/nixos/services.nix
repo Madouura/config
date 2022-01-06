@@ -4,6 +4,7 @@
   services = {
     timesyncd.enable = true;
     cron.enable = true;
+    earlyoom.enable = true;
     printing.enable = true;
     mullvad-vpn.enable = true;
     joycond.enable = true;

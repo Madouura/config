@@ -48,6 +48,7 @@ in {
           yuzu-ea
           dolphinEmuMaster
           ares
+          wine-staging
         ];
 
         file.looking-glass-client = {
