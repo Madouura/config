@@ -15,8 +15,8 @@
     ./packages.nix
     ./programs.nix
     ./services.nix
-    ./desktop/configuration.nix
-#    ./laptop/configuration.nix
+#    ./desktop/configuration.nix
+    ./laptop/configuration.nix
   ];
 
   nix = {

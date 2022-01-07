@@ -1,5 +1,5 @@
 let
-  unstable = import <nixos-unstable-small> { };
+  unstable = import <nixos-unstable> { };
 in {
   # Until next NixOS version change
   nixpkgs.config.packageOverrides = pkgs: {
