@@ -36,6 +36,7 @@ in {
           discord
           qbittorrent
           mullvad-vpn
+          tdesktop
 
           # Media
           ffmpeg
