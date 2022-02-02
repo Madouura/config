@@ -8,5 +8,7 @@
     nload
     ebtables
     dnsmasq
+    pciutils
+    usbutils
   ];
 }

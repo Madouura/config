@@ -24,8 +24,6 @@ in {
           helvum
           looking-glass-client
           protonup
-          pciutils
-          usbutils
           gnome.gnome-tweaks
 
           # Development

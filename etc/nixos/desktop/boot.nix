@@ -7,7 +7,7 @@
       availableKernelModules = [ "vfio-pci" ];
 
       preDeviceCommands = ''
-        DEVS="0000:10:00.0 0000:10:00.1 0000:12:00.3"
+        DEVS="0000:10:00.0 0000:10:00.1"
 
         for DEV in $DEVS; do
           echo "vfio-pci" > /sys/bus/pci/devices/$DEV/driver_override
