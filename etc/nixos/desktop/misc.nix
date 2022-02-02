@@ -25,11 +25,11 @@ let
         </logicalmonitor>
         <logicalmonitor>
           <x>0</x>
-          <y>720</y>
+          <y>384</y>
           <scale>1</scale>
           <monitor>
             <monitorspec>
-              <connector>DP-1</connector>
+              <connector>DP-2</connector>
               <vendor>DEL</vendor>
               <product>DELL S3220DGF</product>
               <serial>308JM73</serial>
