@@ -8,11 +8,7 @@
     printing.enable = true;
     mullvad-vpn.enable = true;
     joycond.enable = true;
-
-    udev = {
-      packages = [ pkgs.dolphinEmuMaster ];
-      extraRules = ''SUBSYSTEM=="kvmfr", OWNER="mado", GROUP="kvm", MODE="0660"'';
-    };
+    udev.packages = [ pkgs.dolphinEmuMaster ];
 
     # Ports: 9050, 9063, 8118
     tor = {
@@ -46,6 +42,7 @@
           "context.properties" = {
             "link.max-buffers" = 16;
             "log.level" = 2;
+            "default.clock.rate" = 192000;
             "default.clock.quantum" = 256;
             "default.clock.min-quantum" = 32;
             "default.clock.max-quantum" = 1024;
@@ -130,6 +127,11 @@
               flags = [ "ifexists" "nofail" ];
 
               args = {
+                "pulse.min.req" = "256/192000";
+                "pulse.default.req" = "256/192000";
+                "pulse.max.req" = "256/192000";
+                "pulse.min.quantum" = "256/192000";
+                "pulse.max.quantum" = "256/192000";
                 "nice.level" = -15;
                 "rt.prio" = 88;
                 "rt.time.soft" = 200000;
@@ -152,6 +154,7 @@
           ];
 
           "stream.properties" = {
+            "node.latency" = "256/192000";
             "resample.quality" = 1;
           };
         };
@@ -168,6 +171,8 @@
 
                 actions = {
                   update-props = {
+                    "audio.format" = "S24LE";
+                    "audio.rate" = 192000;
                     "api.alsa.period-size" = 256;
                   };
                 };

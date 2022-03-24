@@ -1,11 +1,7 @@
-{ config, ... }:
-
 {
   boot = {
-    kernelParams = [ "iommu=pt" ];
+    kernelModules = [ "nct6775" "jc42" ];
     kernel.sysctl = { "kernel.sysrq" = 1; };
-    kernelModules = [ "binder_linux" "kvmfr" ];
-    extraModulePackages = with config.boot.kernelPackages; [ kvmfr ];
     initrd.availableKernelModules = [ "amdgpu" ];
 
     loader = {

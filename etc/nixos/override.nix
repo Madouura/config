@@ -1,16 +1,17 @@
+{ pkgs, ... }:
+
 let
   baseConfig = { allowUnfree = true; };
   unstable = import <nixos-unstable> { config = baseConfig; };
 in {
-  # Until next NixOS version change
-  imports = [ <nixos-unstable/nixos/modules/services/networking/tetrd.nix> ];
-  disabledModules = [ "services/networking/tetrd.nix" ];
+  imports = [ <nixos-unstable/nixos/modules/hardware/xone.nix> ];
+  disabledModules = [ "hardware/xone.nix" ];
 
-  nixpkgs.config = baseConfig // {
-    packageOverrides = pkgs: {
-      looking-glass-client = unstable.looking-glass-client;
-      qemu = unstable.qemu;
-      tetrd = unstable.tetrd;
-    };
+  nixpkgs.config.packageOverrides = pkgs: {
+    bcachefs-tools = unstable.bcachefs-tools;
+    linux_testing_bcachefs = unstable.linux_testing_bcachefs;
+    linuxPackages_testing_bcachefs = unstable.linuxPackages_testing_bcachefs;
+    xone = unstable.xone;
+    xow_dongle-firmware = unstable.xow_dongle-firmware;
   };
 }

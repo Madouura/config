@@ -1,11 +1,11 @@
-{ lib, pkgs, ... }:
+{ pkgs, ... }:
 
 let
-  lgConfig = pkgs.writeText "looking-glass-client.ini" (lib.generators.toINI { } {
-    app.shmFile = "/dev/kvmfr0";
-    win.fullScreen = "yes";
-    spice.input = "no";
-  });
+  fixAudio = pkgs.writeShellScript "fix-audio.sh" ''
+    sleep 5
+    pactl set-card-profile alsa_card.usb-Schiit_Audio_Schiit_Unison_Modius-00 output:iec958-stereo
+    pactl set-card-profile alsa_card.usb-Focusrite_Scarlett_Solo_USB_Y7DZDPB160B058-00 input:iec958-stereo
+  '';
 in {
   home-manager = {
     useUserPackages = true;
@@ -19,11 +19,10 @@ in {
         packages = with pkgs; [
           # Utilities
           appimage-run
-          virt-manager
           pulseaudio
           helvum
-          looking-glass-client
           protonup
+          winetricks
           gnome.gnome-tweaks
 
           # Development
@@ -43,16 +42,11 @@ in {
           gimp
 
           # Games
-          yuzu-ea
+          yuzu
           dolphinEmuMaster
           ares
-          wine-staging
+          wine
         ];
-
-        file.looking-glass-client = {
-          source = lgConfig;
-          target = ".config/looking-glass/client.ini";
-        };
       };
 
       services.mpd = {
@@ -70,14 +64,13 @@ in {
       programs = {
         home-manager.enable = true;
         ncmpcpp.enable = true;
-        vscode.enable = true;
 
         bash = {
           enable = true;
           historyControl = [ "erasedups" ];
 
           shellAliases = {
-            nupgrade = "nix-channel --update && sudo nixos-rebuild switch --upgrade";
+            nupgrade = "nix-channel --update && sudo nix-channel --update && sudo nixos-rebuild switch --upgrade";
             ncollect = "sudo nix-collect-garbage -d";
           };
         };
@@ -86,7 +79,16 @@ in {
           enable = true;
           userName = "Madoura";
           userEmail = "madouura@gmail.com";
-          signing.signByDefault = true;
+
+          signing = {
+            signByDefault = true;
+            key = "502AAF1536657616910C5C9C668F7E0B402B72F9";
+          };
+        };
+
+        vscode = {
+          enable = true;
+          package = pkgs.vscodium;
         };
 
         chromium = {
@@ -133,12 +135,9 @@ in {
         primary = true;
       };
 
-      xdg.desktopEntries.windows-11-virtual-machine = {
-        name = "Windows 11 Virtual Machine";
-        genericName = "Start Windows Gaming VM";
-        comment = "Launches a Windows VM with dedicated graphics for high-performance applications";
-        exec = "/home/mado/.local/bin/win11-vm-start.sh";
-        icon = "/etc/nixos/misc/win11.png";
+      xdg.desktopEntries.fix-audio = {
+        name = "Fix Audio";
+        exec = "${fixAudio}";
         type = "Application";
       };
     };

@@ -15,8 +15,6 @@
     ./packages.nix
     ./programs.nix
     ./services.nix
-    ./desktop/configuration.nix
-#    ./laptop/configuration.nix
   ];
 
   nix = {
@@ -31,6 +29,6 @@
   users.users.mado = {
     isNormalUser = true;
     description = "Madoura";
-    extraGroups = [ "wheel" "kvm" "libvirtd" "corectrl" ];
+    extraGroups = [ "wheel" "corectrl" ];
   };
 }

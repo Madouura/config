@@ -6,9 +6,10 @@
     lm_sensors
     htop
     nload
-    ebtables
-    dnsmasq
     pciutils
     usbutils
+    gptfdisk
+    gnomeExtensions.gsconnect
+    gnomeExtensions.appindicator
   ];
 }
