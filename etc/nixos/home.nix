@@ -33,6 +33,7 @@ in {
           discord
           qbittorrent
           mullvad-vpn
+          brave
 
           # Media
           ffmpeg
@@ -82,29 +83,13 @@ in {
 
           signing = {
             signByDefault = true;
-            key = "502AAF1536657616910C5C9C668F7E0B402B72F9";
+            key = "8A39BFA5C357764D26FBE142A4520F4F74CF98C5";
           };
         };
 
         vscode = {
           enable = true;
           package = pkgs.vscodium;
-        };
-
-        chromium = {
-          enable = true;
-
-          extensions = [
-            { id = "gphhapmejobijbbhgpjhcjognlahblep"; } # Gnome Shell Integration
-            { id = "cjpalhdlnbpafiamejdnhcphjbkeiagm"; } # Ublock Origin
-            { id = "ponfpcnoihfmfllpaingbgckeeldkhle"; } # Enhancer for YouTube
-            { id = "mnjggcdmjocbbbhaepdhchncahnbgone"; } # SponsorBlock for YouTube
-            { id = "dneaehbmnbhcippjikoajpoabadpodje"; } # Old Reddit Redirect
-            { id = "mpbjkejclgfgadiemmefgebjfooflfhl"; } # Buster Captcha Solver
-            { id = "moicohcfhhbmmngneghfjfjpdobmmnlg"; } # LiveTL
-            { id = "hkgfoiooedgoejojocmhlaklaeopbecg"; } # Picture in Picture
-            { id = "jinjaccalgkegednnccohejagnlnfdag"; } # Violentmonkey
-          ];
         };
 
         mpv = {
