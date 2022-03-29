@@ -23,6 +23,8 @@ in {
           helvum
           protonup
           winetricks
+          mangohud
+          goverlay
           gnome.gnome-tweaks
 
           # Development
