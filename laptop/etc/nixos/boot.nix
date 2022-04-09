@@ -1,6 +1,5 @@
 {
   boot = {
-    kernelModules = [ "nct6775" "jc42" ];
     kernel.sysctl = { "kernel.sysrq" = 1; };
 
     loader = {
@@ -14,7 +13,7 @@
 
     initrd = {
       availableKernelModules = [ "amdgpu" ];
-      luks.devices.cryptswap.device = "/dev/disk/by-uuid/a5a8d93f-e4a8-4b37-a5a4-88ea43f8d25d";
+      luks.devices.cryptswap.device = "/dev/disk/by-uuid/3b9dc6ca-0142-4872-9acd-dc908c3b06ba";
     };
   };
 }

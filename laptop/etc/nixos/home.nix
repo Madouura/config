@@ -1,12 +1,10 @@
 { pkgs, ... }:
 
 let
-  fixAudio = pkgs.writeShellScript "fix-audio.sh" ''
-    sleep 5
-    pactl set-card-profile alsa_card.usb-Schiit_Audio_Schiit_Unison_Modius-00 output:iec958-stereo
-    pactl set-card-profile alsa_card.usb-Focusrite_Scarlett_Solo_USB_Y7DZDPB160B058-00 input:iec958-stereo
-  '';
+  home-manager = fetchTarball "https://github.com/nix-community/home-manager/archive/release-21.11.tar.gz";
 in {
+  imports = [ "${home-manager}/nixos" ];
+
   home-manager = {
     useUserPackages = true;
     useGlobalPkgs = true;
@@ -35,7 +33,7 @@ in {
           discord
           qbittorrent
           mullvad-vpn
-          brave
+          firefox
 
           # Media
           ffmpeg
@@ -72,6 +70,7 @@ in {
         bash = {
           enable = true;
           historyControl = [ "erasedups" ];
+          bashrcExtra = ''export XDG_DATA_HOME="/home/mado/.local/share"'';
 
           shellAliases = {
             nupgrade = "nix-channel --update && sudo nix-channel --update && sudo nixos-rebuild switch --upgrade";
@@ -86,7 +85,7 @@ in {
 
           signing = {
             signByDefault = true;
-            key = "8A39BFA5C357764D26FBE142A4520F4F74CF98C5";
+            key = "106371E741F260C92980E6E259B6B50D67575615";
           };
         };
 
@@ -121,12 +120,6 @@ in {
         address = "madouura@gmail.com";
         flavor = "gmail.com";
         primary = true;
-      };
-
-      xdg.desktopEntries.fix-audio = {
-        name = "Fix Audio";
-        exec = "${fixAudio}";
-        type = "Application";
       };
     };
   };

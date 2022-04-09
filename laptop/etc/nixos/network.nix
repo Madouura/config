@@ -1,15 +1,8 @@
 {
   networking = {
-    hostName = "ura";
-    useDHCP = false;
+    hostName = "tsuki";
     networkmanager.enable = true;
     wireguard.enable = true;
     firewall.checkReversePath = "loose";
-
-    interfaces = {
-      enp5s0.useDHCP = true;
-      enp6s0.useDHCP = true;
-      wlp7s0.useDHCP = true;
-    };
   };
 }

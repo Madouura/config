@@ -22,7 +22,24 @@
     enableRedistributableFirmware = true;
     pulseaudio.enable = false;
     bluetooth.enable = true;
-    opengl.driSupport32Bit = true;
 #    xone.enable = true;
+    opengl.driSupport32Bit = true;
+
+
+    nvidia = {
+      modesetting.enable = true;
+      nvidiaPersistenced = true;
+
+      powerManagement = {
+        enable = true;
+        finegrained = true;
+      };
+
+      prime = {
+        offload.enable = true;
+        amdgpuBusId = "PCI:1:0:0";
+        nvidiaBusId = "PCI:7:0:0";
+      };
+    };
   };
 }

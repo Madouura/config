@@ -8,7 +8,14 @@
     printing.enable = true;
     mullvad-vpn.enable = true;
     joycond.enable = true;
+    tetrd.enable = true;
+    asusctl.enable = true;
     udev.packages = [ pkgs.dolphinEmuMaster ];
+
+    supergfxctl = {
+      enable = true;
+      gfx-mode = "Nvidia";
+    };
 
     # Ports: 9050, 9063, 8118
     tor = {
@@ -19,10 +26,14 @@
 
     xserver = {
       enable = true;
-      displayManager.gdm.enable = true;
       desktopManager.gnome.enable = true;
       digimend.enable = true;
-      videoDrivers = [ "amdgpu" ];
+      videoDrivers = [ "amdgpu" "nvidia" ];
+
+      displayManager.gdm = {
+        enable = true;
+        nvidiaWayland = true;
+      };
 
       deviceSection = ''
         Option "TearFree"        "true"
@@ -42,7 +53,7 @@
           "context.properties" = {
             "link.max-buffers" = 16;
             "log.level" = 2;
-            "default.clock.rate" = 192000;
+            "default.clock.rate" = 48000;
             "default.clock.quantum" = 256;
             "default.clock.min-quantum" = 32;
             "default.clock.max-quantum" = 1024;
@@ -127,11 +138,11 @@
               flags = [ "ifexists" "nofail" ];
 
               args = {
-                "pulse.min.req" = "256/192000";
-                "pulse.default.req" = "256/192000";
-                "pulse.max.req" = "256/192000";
-                "pulse.min.quantum" = "256/192000";
-                "pulse.max.quantum" = "256/192000";
+                "pulse.min.req" = "256/48000";
+                "pulse.default.req" = "256/48000";
+                "pulse.max.req" = "256/48000";
+                "pulse.min.quantum" = "256/48000";
+                "pulse.max.quantum" = "256/48000";
                 "nice.level" = -15;
                 "rt.prio" = 88;
                 "rt.time.soft" = 200000;
@@ -154,7 +165,7 @@
           ];
 
           "stream.properties" = {
-            "node.latency" = "256/192000";
+            "node.latency" = "256/48000";
             "resample.quality" = 1;
           };
         };
@@ -171,8 +182,8 @@
 
                 actions = {
                   update-props = {
-                    "audio.format" = "S24LE";
-                    "audio.rate" = 192000;
+                    "audio.format" = "S16LE";
+                    "audio.rate" = 48000;
                     "api.alsa.period-size" = 256;
                   };
                 };
@@ -206,6 +217,18 @@
           ];
         };
       };
+    };
+  };
+
+  systemd.services = {
+    asusd = {
+      enable = true;
+      wantedBy = [ "multi-user.target" ];
+    };
+
+    supergfxd = {
+      enable = true;
+      wantedBy = [ "multi-user.target" ];
     };
   };
 }
