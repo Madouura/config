@@ -49,6 +49,7 @@ in {
           dolphinEmuMaster
           ares
           wine
+          chiaki
         ];
       };
 

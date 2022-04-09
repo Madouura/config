@@ -23,6 +23,6 @@
     pulseaudio.enable = false;
     bluetooth.enable = true;
     opengl.driSupport32Bit = true;
-    xone.enable = true;
+#    xone.enable = true;
   };
 }

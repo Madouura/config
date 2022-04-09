@@ -1,24 +1,6 @@
 <monitors version="2">
   <configuration>
     <logicalmonitor>
-      <x>0</x>
-      <y>430</y>
-      <scale>1</scale>
-      <monitor>
-        <monitorspec>
-          <connector>DP-2</connector>
-          <vendor>DEL</vendor>
-          <product>DELL S3220DGF</product>
-          <serial>308JM73</serial>
-        </monitorspec>
-        <mode>
-          <width>2560</width>
-          <height>1440</height>
-          <rate>164.05610656738281</rate>
-        </mode>
-      </monitor>
-    </logicalmonitor>
-    <logicalmonitor>
       <x>2560</x>
       <y>0</y>
       <scale>1</scale>
@@ -37,13 +19,23 @@
         </mode>
       </monitor>
     </logicalmonitor>
-    <disabled>
-      <monitorspec>
-        <connector>HDMI-2</connector>
-        <vendor>GSM</vendor>
-        <product>LG TV SSCR2</product>
-        <serial>0x01010101</serial>
-      </monitorspec>
-    </disabled>
+    <logicalmonitor>
+      <x>0</x>
+      <y>457</y>
+      <scale>1</scale>
+      <monitor>
+        <monitorspec>
+          <connector>DP-2</connector>
+          <vendor>DEL</vendor>
+          <product>DELL S3220DGF</product>
+          <serial>308JM73</serial>
+        </monitorspec>
+        <mode>
+          <width>2560</width>
+          <height>1440</height>
+          <rate>164.05610656738281</rate>
+        </mode>
+      </monitor>
+    </logicalmonitor>
   </configuration>
 </monitors>
