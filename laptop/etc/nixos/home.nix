@@ -1,9 +1,7 @@
 { pkgs, ... }:
 
-let
-  home-manager = fetchTarball "https://github.com/nix-community/home-manager/archive/release-21.11.tar.gz";
-in {
-  imports = [ "${home-manager}/nixos" ];
+{
+  imports = [ <home-manager/nixos> ];
 
   home-manager = {
     useUserPackages = true;
