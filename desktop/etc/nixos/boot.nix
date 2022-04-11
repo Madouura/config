@@ -14,7 +14,7 @@
 
     initrd = {
       availableKernelModules = [ "amdgpu" ];
-      luks.devices.cryptswap.device = "/dev/disk/by-uuid/a5a8d93f-e4a8-4b37-a5a4-88ea43f8d25d";
+      luks.devices.cryptswap.device = "/dev/disk/by-uuid/85815e8c-97fc-4c28-ad45-5441fa54d235";
     };
   };
 }

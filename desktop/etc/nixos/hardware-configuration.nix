@@ -19,12 +19,12 @@
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/5E2E-F6CC";
+    { device = "/dev/disk/by-uuid/B5AA-717D";
       fsType = "vfat";
     };
 
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/0ba81e8e-9c4d-4dc2-af6a-ba6ea24c8da4"; }
+    [ { device = "/dev/disk/by-uuid/47249b69-5561-4162-9341-c6f789c306a4"; }
     ];
 
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;

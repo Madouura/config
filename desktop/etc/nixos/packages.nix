@@ -9,7 +9,5 @@
     pciutils
     usbutils
     gptfdisk
-    gnomeExtensions.gsconnect
-    gnomeExtensions.appindicator
   ];
 }

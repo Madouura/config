@@ -88,7 +88,7 @@ in {
 
           signing = {
             signByDefault = true;
-            key = "8A39BFA5C357764D26FBE142A4520F4F74CF98C5";
+            key = "C83FB29ABF63211D7C24B7A350CCE80199B1F736";
           };
         };
 
