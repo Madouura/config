@@ -55,16 +55,20 @@ in {
         ];
       };
 
-      services.mpd = {
-        enable = true;
-        musicDirectory = /home/mado/Music;
+      services = {
+        mpdris2.enable = true;
 
-        extraConfig = ''
-          audio_output {
-            type            "pipewire"
-            name            "PipeWire Sound Server"
-          }
-        '';
+        mpd = {
+          enable = true;
+          musicDirectory = /home/mado/Music;
+
+          extraConfig = ''
+            audio_output {
+              type            "pipewire"
+              name            "PipeWire Sound Server"
+            }
+          '';
+        };
       };
 
       programs = {

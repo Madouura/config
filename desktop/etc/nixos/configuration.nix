@@ -10,6 +10,7 @@
     ./home.nix
     ./misc.nix
     ./network.nix
+    ./overlays.nix
     ./packages.nix
     ./programs.nix
     ./services.nix
