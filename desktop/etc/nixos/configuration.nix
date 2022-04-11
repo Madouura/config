@@ -5,13 +5,12 @@
   nixpkgs.config.allowUnfree = true;
 
   imports = [
-    <home-manager/nixos>
     ./boot.nix
     ./hardware-configuration.nix
     ./home.nix
     ./misc.nix
     ./network.nix
-    ./override.nix
+    ./overlays.nix
     ./packages.nix
     ./programs.nix
     ./services.nix

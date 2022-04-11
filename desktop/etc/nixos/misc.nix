@@ -22,7 +22,7 @@
     enableRedistributableFirmware = true;
     pulseaudio.enable = false;
     bluetooth.enable = true;
-    opengl.driSupport32Bit = true;
 #    xone.enable = true;
+    opengl.driSupport32Bit = true;
   };
 }

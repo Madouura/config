@@ -7,6 +7,8 @@ let
     pactl set-card-profile alsa_card.usb-Focusrite_Scarlett_Solo_USB_Y7DZDPB160B058-00 input:iec958-stereo
   '';
 in {
+  imports = [ <home-manager/nixos> ];
+
   home-manager = {
     useUserPackages = true;
     useGlobalPkgs = true;
@@ -35,7 +37,7 @@ in {
           discord
           qbittorrent
           mullvad-vpn
-          brave
+          firefox
 
           # Media
           ffmpeg
