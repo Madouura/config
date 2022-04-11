@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 let
-  bcachefs_tar = fetchTarball "https://github.com/NixOS/nixpkgs/archive/ae8c5d35b5ee56ebe883a4cc6fe696e90126bf03.tar.gz";
+  bcachefs_tar = fetchTarball "https://github.com/Madouura/nixpkgs/archive/833899a6d9366174a127d8428f658aa90081a6a7.tar.gz";
 in {
   nixpkgs.overlays = [
     (final: prev: {
