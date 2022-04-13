@@ -1,8 +1,9 @@
 { pkgs, ... }:
 
 {
-  time.timeZone = "America/Chicago";
   zramSwap.enable = true;
+  powerManagement.cpuFreqGovernor = "ondemand";
+  time.timeZone = "America/Chicago";
   security.rtkit.enable = true;
   virtualisation.waydroid.enable = true;
   fonts.fonts = with pkgs; [ ipafont baekmuk-ttf ];
