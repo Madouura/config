@@ -18,7 +18,5 @@ in {
     usbutils
     gptfdisk
     nvidia-offload
-    gnomeExtensions.gsconnect
-    gnomeExtensions.appindicator
   ];
 }
