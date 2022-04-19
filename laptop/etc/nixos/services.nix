@@ -33,6 +33,7 @@
       displayManager.gdm = {
         enable = true;
         nvidiaWayland = true;
+        autoSuspend = false;
       };
 
       deviceSection = ''
@@ -220,15 +221,24 @@
     };
   };
 
-  systemd.services = {
-    asusd = {
-      enable = true;
-      wantedBy = [ "multi-user.target" ];
+  systemd = {
+    targets = {
+      sleep.enable = false;
+      suspend.enable = false;
+      hibernate.enable = false;
+      hybrid-sleep.enable = false;
     };
 
-    supergfxd = {
-      enable = true;
-      wantedBy = [ "multi-user.target" ];
+    services = {
+      asusd = {
+        enable = true;
+        wantedBy = [ "multi-user.target" ];
+      };
+
+      supergfxd = {
+        enable = true;
+        wantedBy = [ "multi-user.target" ];
+      };
     };
   };
 }
