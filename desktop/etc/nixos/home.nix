@@ -32,6 +32,7 @@ in {
           # Development
           gnumake
           gcc
+          libreoffice
 
           # Internet
           discord
