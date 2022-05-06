@@ -27,6 +27,8 @@ in {
           winetricks
           mangohud
           goverlay
+          minicom
+          picocom
           gnome.gnome-tweaks
 
           # Development
@@ -46,6 +48,7 @@ in {
           easyeffects
           obs-studio
           gimp
+          vlc
 
           # Games
           yuzu
@@ -113,6 +116,7 @@ in {
             interpolation = "";
             tscale = "oversample";
             no-border = "";
+            sub-auto = "fuzzy";
             alang = "jp,jpn,japan";
             slang = "en,eng,english";
             screenshot-template = "%F (%p)";
