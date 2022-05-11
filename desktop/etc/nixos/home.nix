@@ -29,12 +29,14 @@ in {
           goverlay
           minicom
           picocom
+          direnv
           gnome.gnome-tweaks
 
           # Development
           gnumake
           gcc
           libreoffice
+          unityhub
 
           # Internet
           discord
