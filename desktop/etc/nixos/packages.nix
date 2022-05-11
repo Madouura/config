@@ -9,5 +9,7 @@
     pciutils
     usbutils
     gptfdisk
+    minicom
+    picocom
   ];
 }

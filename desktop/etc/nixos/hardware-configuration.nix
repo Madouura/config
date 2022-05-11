@@ -27,6 +27,7 @@
     [ { device = "/dev/disk/by-uuid/47249b69-5561-4162-9341-c6f789c306a4"; }
     ];
 
+  powerManagement.cpuFreqGovernor = lib.mkDefault "ondemand";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
   # high-resolution display
   hardware.video.hidpi.enable = lib.mkDefault true;

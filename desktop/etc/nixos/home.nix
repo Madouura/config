@@ -27,8 +27,6 @@ in {
           winetricks
           mangohud
           goverlay
-          minicom
-          picocom
           direnv
           gnome.gnome-tweaks
 
