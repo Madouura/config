@@ -15,7 +15,7 @@ in {
 
     users.mado = {
       home = {
-        stateVersion = "21.11";
+        stateVersion = "22.05";
         enableNixpkgsReleaseCheck = true;
 
         packages = with pkgs; [
@@ -31,10 +31,12 @@ in {
           gnome.gnome-tweaks
 
           # Development
+          gh
           gnumake
           gcc
           libreoffice
           unityhub
+          python3
 
           # Internet
           discord
