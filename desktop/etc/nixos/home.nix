@@ -1,12 +1,6 @@
 { pkgs, ... }:
 
-let
-  fixAudio = pkgs.writeShellScript "fix-audio.sh" ''
-    sleep 5
-    pactl set-card-profile alsa_card.usb-Schiit_Audio_Schiit_Unison_Modius-00 output:iec958-stereo
-    pactl set-card-profile alsa_card.usb-Focusrite_Scarlett_Solo_USB_Y7DZDPB160B058-00 input:iec958-stereo
-  '';
-in {
+{
   imports = [ <home-manager/nixos> ];
 
   home-manager = {
@@ -134,12 +128,6 @@ in {
         address = "madouura@gmail.com";
         flavor = "gmail.com";
         primary = true;
-      };
-
-      xdg.desktopEntries.fix-audio = {
-        name = "Fix Audio";
-        exec = "${fixAudio}";
-        type = "Application";
       };
     };
   };
