@@ -9,13 +9,9 @@
     mullvad-vpn.enable = true;
     joycond.enable = true;
     tetrd.enable = true;
-    asusctl.enable = true;
+    asusd.enable = true;
+    supergfxd.gfx-mode = "Nvidia";
     udev.packages = [ pkgs.dolphinEmuMaster ];
-
-    supergfxctl = {
-      enable = true;
-      gfx-mode = "Nvidia";
-    };
 
     # Ports: 9050, 9063, 8118
     tor = {
@@ -32,7 +28,6 @@
 
       displayManager.gdm = {
         enable = true;
-        nvidiaWayland = true;
         autoSuspend = false;
       };
 
@@ -193,5 +188,5 @@
 #        wantedBy = [ "multi-user.target" ];
 #      };
 #    };
-#  };
+  };
 }

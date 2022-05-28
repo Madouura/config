@@ -2,8 +2,8 @@ let
   asusctl_pr_tar = fetchTarball "https://github.com/NixOS/nixpkgs/archive/589b192a76c9854e19850d746d074bb5ad605f38.tar.gz";
 in {
   imports = [
-    "${asusctl_pr_tar}/nixos/modules/services/misc/asusctl.nix"
-    "${asusctl_pr_tar}/nixos/modules/services/misc/supergfxctl.nix"
+    "${asusctl_pr_tar}/nixos/modules/services/misc/asusd.nix"
+    "${asusctl_pr_tar}/nixos/modules/services/misc/supergfxd.nix"
   ];
 
   nixpkgs.overlays = [
