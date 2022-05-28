@@ -9,7 +9,7 @@
 
     users.mado = {
       home = {
-        stateVersion = "21.11";
+        stateVersion = "22.05";
         enableNixpkgsReleaseCheck = true;
 
         packages = with pkgs; [
@@ -21,11 +21,14 @@
           winetricks
           mangohud
           goverlay
+          direnv
           gnome.gnome-tweaks
 
           # Development
+          gh
           gnumake
           gcc
+          python3
           libreoffice
 
           # Internet
