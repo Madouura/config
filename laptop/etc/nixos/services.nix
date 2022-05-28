@@ -176,17 +176,5 @@
       hibernate.enable = false;
       hybrid-sleep.enable = false;
     };
-
-#    services = {
-#      asusd = {
-#        enable = true;
-#        wantedBy = [ "multi-user.target" ];
-#      };
-
-#      supergfxd = {
-#        enable = true;
-#        wantedBy = [ "multi-user.target" ];
-#      };
-#    };
   };
 }
