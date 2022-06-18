@@ -3,8 +3,13 @@
     thefuck.enable = true;
     dconf.enable = true;
     corectrl.enable = true;
-    steam.enable = true;
     gnupg.agent.enable = true;
+
+    steam = {
+      enable = true;
+      remotePlay.openFirewall = true;
+      dedicatedServer.openFirewall = true;
+    };
 
     nano = {
       syntaxHighlight = true;

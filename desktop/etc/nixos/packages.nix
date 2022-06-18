@@ -11,5 +11,6 @@
     gptfdisk
     minicom
     picocom
+#    gamescope
   ];
 }
