@@ -28,8 +28,8 @@
           gh
           gnumake
           gcc
-          python3
           libreoffice
+          python3
 
           # Internet
           discord
@@ -43,6 +43,8 @@
           easyeffects
           obs-studio
           gimp
+          vlc
+          mixxx
 
           # Games
           yuzu
@@ -76,7 +78,6 @@
         bash = {
           enable = true;
           historyControl = [ "erasedups" ];
-          bashrcExtra = ''export XDG_DATA_HOME="/home/mado/.local/share"'';
 
           shellAliases = {
             nupgrade = "nix-channel --update && sudo nix-channel --update && sudo nixos-rebuild switch --upgrade";
@@ -91,7 +92,7 @@
 
           signing = {
             signByDefault = true;
-            key = "106371E741F260C92980E6E259B6B50D67575615";
+            key = "C83FB29ABF63211D7C24B7A350CCE80199B1F736";
           };
         };
 
@@ -111,6 +112,7 @@
             interpolation = "";
             tscale = "oversample";
             no-border = "";
+            sub-auto = "fuzzy";
             alang = "jp,jpn,japan";
             slang = "en,eng,english";
             screenshot-template = "%F (%p)";

@@ -28,6 +28,6 @@
   users.users.mado = {
     isNormalUser = true;
     description = "Madoura";
-    extraGroups = [ "wheel" "corectrl" ];
+    extraGroups = [ "wheel" "kvm" "libvirtd" "corectrl" ];
   };
 }

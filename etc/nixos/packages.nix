@@ -6,11 +6,18 @@
     lm_sensors
     htop
     nload
+    ebtables
+    dnsmasq
     pciutils
     usbutils
     gptfdisk
     minicom
     picocom
 #    gamescope
+    chrome-gnome-shell
+    virtmanager
+    gnomeExtensions.appindicator
+    gnomeExtensions.gsconnect
+    gnome.gnome-settings-daemon
   ];
 }
