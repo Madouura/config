@@ -33,5 +33,23 @@
     "/".options = [ "discard" ];
     "/boot".options = [ "discard" ];
     "/mnt/cach".options = [ "discard" ];
+
+    "/home/mado/.virtiofs/Music" = {
+      device = "/mnt/stor/home/mado/Music";
+      fsType = "none";
+      options = [ "ro" "bind" ];
+    };
+
+    "/home/mado/.virtiofs/Games/Hentai" = {
+      device = "/mnt/stor/home/mado/Games/Hentai";
+      fsType = "none";
+      options = [ "rw" "bind" ];
+    };
+
+    "/home/mado/.virtiofs/Games/SteamLibrary" = {
+      device = "/mnt/cach/home/mado/Games/SteamLibrary";
+      fsType = "none";
+      options = [ "rw" "bind" ];
+    };
   };
 }
