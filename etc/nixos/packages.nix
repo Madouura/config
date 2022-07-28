@@ -16,6 +16,7 @@
 #    gamescope
     chrome-gnome-shell
     virtmanager
+    virtiofsd
     gnomeExtensions.appindicator
     gnomeExtensions.gsconnect
     gnome.gnome-settings-daemon

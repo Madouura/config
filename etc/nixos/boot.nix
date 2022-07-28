@@ -2,7 +2,7 @@
 
 {
   boot = {
-#    kernelPackages = pkgs.linuxPackages_zen;
+    kernelPackages = pkgs.linuxPackages_zen;
     kernelParams = [ "iommu=pt" ];
     kernelModules = [ "nct6775" "jc42" ];
     kernel.sysctl = { "kernel.sysrq" = 1; };

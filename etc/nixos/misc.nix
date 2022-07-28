@@ -1,27 +1,25 @@
 { pkgs, ... }:
 
 let
-  win11Vars = pkgs.writeText "win11-vm-vars.conf" ''
-    ALLOWED_CPUS=0-7,16-23
-    TOTAL_CPUS=0-31
-    ON_GOVERNOR=performance
-    OFF_GOVERNOR=ondemand
-  '';
-
   qemuHook = pkgs.writeShellScript "qemu-hook.sh" ''
     GUEST_NAME="$1"
     OPERATION="$2"
     SUB_OPERATION="$3"
-    source "/var/lib/libvirt/hooks/vars.conf"
+    ALLOWED_CPUS=0-7,16-23
+    TOTAL_CPUS=0-31
+    ON_GOVERNOR=performance
+    OFF_GOVERNOR=ondemand
 
     if [ "$GUEST_NAME" == "win11" ]; then
       if [ "$OPERATION" == "prepare" ] && [ "$SUB_OPERATION" == "begin" ]; then
         for governor in /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor; do
           echo $ON_GOVERNOR > $governor;
         done
+
         systemctl set-property --runtime -- user.slice AllowedCPUs=$ALLOWED_CPUS
         systemctl set-property --runtime -- system.slice AllowedCPUs=$ALLOWED_CPUS
         systemctl set-property --runtime -- init.scope AllowedCPUs=$ALLOWED_CPUS
+
         sync
         echo 3 > /proc/sys/vm/drop_caches
         sync
@@ -32,6 +30,7 @@ let
         systemctl set-property --runtime -- user.slice AllowedCPUs=$TOTAL_CPUS
         systemctl set-property --runtime -- system.slice AllowedCPUs=$TOTAL_CPUS
         systemctl set-property --runtime -- init.scope AllowedCPUs=$TOTAL_CPUS
+
         for governor in /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor; do
           echo $OFF_GOVERNOR > $governor;
         done
@@ -50,7 +49,6 @@ in {
     "L+ /var/lib/AccountsService/users/mado - - - - /etc/nixos/resources/gdm"
     "L+ /var/lib/AccountsService/icons/mado - - - - /etc/nixos/resources/avatar.png"
     "L+ /var/lib/libvirt/hooks/qemu - - - - ${qemuHook}"
-    "L+ /var/lib/libvirt/hooks/vars.conf - - - - ${win11Vars}"
   ];
 
   environment = {
@@ -90,6 +88,11 @@ in {
       qemu = {
         ovmf.enable = true;
         swtpm.enable = true;
+
+        verbatimConfig = ''
+          user = "mado"
+          group = "users"
+        '';
       };
     };
   };

@@ -1,3 +1,5 @@
+{ pkgs, ... }:
+
 {
   programs = {
     thefuck.enable = true;
@@ -19,6 +21,11 @@
         set tabstospaces
         set tabsize 2
       '';
+    };
+
+    kdeconnect = {
+      enable = true;
+      package = pkgs.gnomeExtensions.gsconnect;
     };
 
     gamemode = {
