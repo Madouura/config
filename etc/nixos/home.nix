@@ -89,6 +89,7 @@
           enable = true;
           userName = "Madoura";
           userEmail = "madouura@gmail.com";
+          lfs.enable = true;
 
           signing = {
             signByDefault = true;

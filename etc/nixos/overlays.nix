@@ -1,16 +1,18 @@
 let
-#  nur_tar = fetchTarball "https://github.com/nix-community/nur-combined/archive/master.tar.gz";
-#  vfsd_tar = fetchTarball "https://github.com/astro/nixpkgs/archive/082dd22447728db8acf13a5a013a6bff2a89f1dd.tar.gz";
+  unstable = (import <nixos-unstable> { });
 in {
+  imports = [ <nixos-unstable/nixos/modules/virtualisation/waydroid.nix> ];
+  disabledModules = [ "virtualisation/waydroid.nix" ];
+
   nixpkgs.overlays = [
     (final: prev: {
-      virtiofsd = (import <nixos-unstable> { }).virtiofsd;
-#      virtiofsd = (import "${vfsd_tar}" { }).virtiofsd;
+      linuxKernel = unstable.linuxKernel;
+      linuxPackages_zen = unstable.linuxPackages_zen;
+      virtiofsd = unstable.virtiofsd;
+      waydroid = unstable.waydroid;
+      rpcs3 = unstable.rpcs3;
+      gamescope = unstable.gamescope;
     })
-
-#    (final: prev: {
-#      gamescope = (import "${nur_tar}" { pkgs = prev; }).repos.dukzcry.gamescope;
-#    })
 
     (final: prev: {
       protonup = prev.protonup.overrideAttrs (old: {

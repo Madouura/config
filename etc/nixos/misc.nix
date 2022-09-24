@@ -41,8 +41,27 @@ in {
   zramSwap.enable = true;
   powerManagement.cpuFreqGovernor = "ondemand";
   time.timeZone = "America/Chicago";
-  security.rtkit.enable = true;
   fonts.fonts = with pkgs; [ ipafont baekmuk-ttf ];
+
+  security = {
+    rtkit.enable = true;
+
+    pam.loginLimits = [
+      {
+        domain = "*";
+        type = "hard";
+        item = "memlock";
+        value = "unlimited";
+      }
+
+      {
+        domain = "*";
+        type = "soft";
+        item = "memlock";
+        value = "unlimited";
+      }
+    ];
+  };
 
   systemd.tmpfiles.rules = [
     "L+ /run/gdm/.config/monitors.xml - - - - /etc/nixos/resources/monitors.xml"
@@ -79,6 +98,7 @@ in {
 
   virtualisation = {
     waydroid.enable = true;
+    lxd.enable = true;
 
     libvirtd = {
       enable = true;

@@ -17,6 +17,13 @@
     chrome-gnome-shell
     virtmanager
     virtiofsd
+    liquidctl
+    openrgb
+    conda
+    git-lfs
+    pcsx2
+    rpcs3
+    gamescope
     gnomeExtensions.appindicator
     gnomeExtensions.gsconnect
     gnome.gnome-settings-daemon
