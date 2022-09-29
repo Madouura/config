@@ -13,7 +13,7 @@
     gptfdisk
     minicom
     picocom
-#    gamescope
+    gamescope
     chrome-gnome-shell
     virtmanager
     virtiofsd
@@ -23,7 +23,7 @@
     git-lfs
     pcsx2
     rpcs3
-    gamescope
+    monero-gui
     gnomeExtensions.appindicator
     gnomeExtensions.gsconnect
     gnome.gnome-settings-daemon

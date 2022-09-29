@@ -8,6 +8,7 @@
     printing.enable = true;
     mullvad-vpn.enable = true;
     joycond.enable = true;
+    monero.enable = true;
     udev.packages = [ pkgs.dolphinEmuMaster ];
 
     # Ports: 9050, 9063, 8118

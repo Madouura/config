@@ -99,6 +99,7 @@ in {
   virtualisation = {
     waydroid.enable = true;
     lxd.enable = true;
+    docker.enable = true;
 
     libvirtd = {
       enable = true;
@@ -122,6 +123,15 @@ in {
     pulseaudio.enable = false;
     bluetooth.enable = true;
     xone.enable = true;
-    opengl.driSupport32Bit = true;
+
+    opengl = {
+      driSupport = true;
+      driSupport32Bit = true;
+
+      extraPackages = with pkgs; [
+        rocm-opencl-icd
+        rocm-opencl-runtime
+      ];
+    };
   };
 }
