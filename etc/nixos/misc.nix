@@ -123,6 +123,7 @@ in {
     pulseaudio.enable = false;
     bluetooth.enable = true;
     xone.enable = true;
+    ledger.enable = true;
 
     opengl = {
       driSupport = true;

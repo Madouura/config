@@ -24,6 +24,7 @@
     pcsx2
     rpcs3
     monero-gui
+    ledger-live-desktop
     gnomeExtensions.appindicator
     gnomeExtensions.gsconnect
     gnome.gnome-settings-daemon
