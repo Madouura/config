@@ -3,7 +3,7 @@
 {
   boot = {
     kernelPackages = pkgs.linuxPackages_zen;
-    kernelParams = [ "iommu=pt" ];
+    kernelParams = [ "iommu=pt" "amdgpu.ppfeaturemask=0xffffffff" ];
     kernelModules = [ "nct6775" "jc42" ];
     kernel.sysctl = { "kernel.sysrq" = 1; };
     resumeDevice = "/dev/disk/by-uuid/a8e45243-e6ae-47a3-b3a8-965c2eb0ed98";

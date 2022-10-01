@@ -28,6 +28,6 @@
   users.users.mado = {
     isNormalUser = true;
     description = "Madoura";
-    extraGroups = [ "wheel" "kvm" "libvirtd" "corectrl" "rtkit" ];
+    extraGroups = [ "wheel" "kvm" "libvirtd" "corectrl" "rtkit" "gamemode" ];
   };
 }

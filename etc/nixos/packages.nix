@@ -30,10 +30,13 @@
         protonup            # Update proton GE
         chrome-gnome-shell  # GNOME-browser integration
         gnome.gnome-tweaks  # Extended GNOME settings
-        gnomeExtensions.gsconnect
         gamescope           # Micro-compositor for Steam
+        mangohud            # Game performance overlay
 
       ## GUI ##
+        # Utilities #
+        goverlay
+
         # Office #
         libreoffice         # It's like MS Office, but free
 
