@@ -31,6 +31,20 @@
       '';
     };
 
+    mpd = {
+      enable = true;
+      startWhenNeeded = true;
+      user = "mado";
+      musicDirectory = "/mnt/cach/home/mado/Music";
+
+      extraConfig = ''
+        audio_output {
+          type            "pipewire"
+          name            "PipeWire Sound Server"
+        }
+      '';
+    };
+
     pipewire = {
       enable = true;
       alsa.enable = true;
@@ -161,5 +175,9 @@
         };
       };
     };
+  };
+
+  systemd.services.mpd.environment = {
+    XDG_RUNTIME_DIR = "/run/user/1000";
   };
 }

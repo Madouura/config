@@ -14,7 +14,7 @@
     };
 
     initrd = {
-      availableKernelModules = [ "amdgpu" "vfio-pci" ];
+      availableKernelModules = [ "vfio-pci" "amdgpu" ];
       luks.devices."cryptswap".device = "/dev/disk/by-uuid/1acd8b73-20f1-4697-915a-b931e5b0b0a1";
 
       preDeviceCommands = ''

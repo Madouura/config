@@ -7,6 +7,16 @@
     corectrl.enable = true;
     gnupg.agent.enable = true;
 
+    git = {
+      enable = true;
+      lfs.enable = true;
+    };
+
+    bash.shellAliases = {
+      nupgrade = "nix-channel --update && sudo nix-channel --update && sudo nixos-rebuild switch --upgrade";
+      ncollect = "sudo nix-collect-garbage -d";
+    };
+
     steam = {
       enable = true;
       remotePlay.openFirewall = true;

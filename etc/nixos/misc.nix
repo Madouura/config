@@ -77,13 +77,13 @@ in {
     };
 
     etc = {
-#      "wireplumber/alsa.lua.d/51-alsa-monitor.lua".text = ''
-#        alsa_monitor.properties = {
-#          ["audio.format"] = "S24LE";
-#          ["audio.rate"] = 192000;
-#          ["api.alsa.period-size"] = 256;
-#        };
-#      '';
+      "wireplumber/alsa.lua.d/51-alsa-monitor.lua".text = ''
+        alsa_monitor.properties = {
+          ["audio.format"] = "S24LE";
+          ["audio.rate"] = 192000;
+          ["api.alsa.period-size"] = 256;
+        };
+      '';
 
       "wireplumber/bluetooth.lua.d/51-bluez-config.lua".text = ''
         bluez_monitor.properties = {
@@ -120,9 +120,9 @@ in {
 
   hardware = {
     enableRedistributableFirmware = true;
-    pulseaudio.enable = false;
     bluetooth.enable = true;
     xone.enable = true;
+    pulseaudio.enable = false;
     ledger.enable = true;
 
     opengl = {

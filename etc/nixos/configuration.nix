@@ -7,7 +7,6 @@
   imports = [
     ./boot.nix
     ./hardware-configuration.nix
-    ./home.nix
     ./misc.nix
     ./network.nix
     ./overlays.nix
