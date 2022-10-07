@@ -8,7 +8,6 @@
     printing.enable = true;
     mullvad-vpn.enable = true;
     joycond.enable = true;
-    monero.enable = true;
     udev.packages = [ pkgs.dolphinEmuMaster ];
 
     # Ports: 9050, 9063, 8118
@@ -18,12 +17,24 @@
       torsocks.enable = true;
     };
 
+    monero = {
+      enable = true;
+
+      extraConfig = ''
+        zmq-pub=tcp://127.0.0.1:18083
+      '';
+    };
+
     xserver = {
       enable = true;
-      displayManager.gdm.enable = true;
       desktopManager.gnome.enable = true;
       digimend.enable = true;
       videoDrivers = [ "amdgpu" ];
+
+      displayManager.gdm = {
+        enable = true;
+        autoSuspend = false;
+      };
 
       deviceSection = ''
         Option "TearFree"        "true"

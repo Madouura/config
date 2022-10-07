@@ -8,6 +8,7 @@
         lm_sensors          # Hardware temperature and voltage
         pciutils            # List PCI devices
         usbutils            # List USB devices
+        msr-tools           # CPU MSR stuff
 
         # Statistics #
         htop                # System monitor
@@ -22,6 +23,9 @@
 
         # Virtualization #
         virtiofsd           # Host filesystem accessible by virtual machine
+
+        # Terminal #
+        screen              # Multiplex several terminals
 
     ### User ###
       ## Utilities ##
@@ -69,6 +73,9 @@
 
         # Crypto #
         monero-gui          # Official Monero client
+        monero-cli          # Official Monero client (CLI)
         ledger-live-desktop # Official Ledger hardware wallet client
+        p2pool              # Monero mining
+        xmrig               # Monero mining
   ];
 }

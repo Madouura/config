@@ -1,6 +1,15 @@
 { pkgs, ... }:
 
 let
+  mining = pkgs.writeShellScript "mining.sh" ''
+    cd /home/mado/.p2pool
+    screen -dmS mining
+    screen -X exec p2pool --mini --wallet ${builtins.readFile /etc/nixos/resources/monero_pubaddr}
+    screen -X screen
+    screen -X exec sudo xmrig -t 24 --randomx-1gb-pages -o 127.0.0.1:3333
+    screen -r
+  '';
+
   qemuHook = pkgs.writeShellScript "qemu-hook.sh" ''
     GUEST_NAME="$1"
     OPERATION="$2"
@@ -68,6 +77,7 @@ in {
     "L+ /var/lib/AccountsService/users/mado - - - - /etc/nixos/resources/gdm"
     "L+ /var/lib/AccountsService/icons/mado - - - - /etc/nixos/resources/avatar.png"
     "L+ /var/lib/libvirt/hooks/qemu - - - - ${qemuHook}"
+    "L+ /home/mado/.local/bin/mining.sh - - - - ${mining}"
   ];
 
   environment = {

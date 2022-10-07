@@ -1,8 +1,15 @@
 let
   unstable = (import <nixos-unstable> { });
 in {
-  imports = [ <nixos-unstable/nixos/modules/virtualisation/waydroid.nix> ];
-  disabledModules = [ "virtualisation/waydroid.nix" ];
+  imports = [
+    <nixos-unstable/nixos/modules/virtualisation/waydroid.nix>
+    <nixos-unstable/nixos/modules/services/networking/monero.nix>
+  ];
+
+  disabledModules = [
+    "virtualisation/waydroid.nix"
+    "services/networking/monero.nix"
+  ];
 
   nixpkgs.overlays = [
     (final: prev: {
@@ -12,6 +19,11 @@ in {
       waydroid = unstable.waydroid;
       rpcs3 = unstable.rpcs3;
       gamescope = unstable.gamescope;
+      p2pool = unstable.p2pool;
+      xmrig = unstable.xmrig;
+      monero-cli = unstable.monero-cli;
+      monero-gui = unstable.monero-gui;
+      ledger-live-desktop = unstable.ledger-live-desktop;
     })
 
     (final: prev: {
